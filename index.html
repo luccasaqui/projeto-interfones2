@@ -44,6 +44,9 @@
             width: 150px;
             height: 80px;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .search-animation .icon-magnifier {
             position: absolute;
@@ -110,7 +113,7 @@
                 <input type="text" id="numero" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="(DD) 99999-9999">
             </div>
 
-            <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
+            <div id="mainButtonsContainer" class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
                 <button id="avancarBtn" class="w-full md:w-1/2 bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
                     Avançar
                 </button>
@@ -129,19 +132,16 @@
                     </div>
                     <div class="card-group">
                         <div class="card bg-gray-300 rounded-lg shadow-md flex items-center justify-center text-gray-500 font-bold">
-                            <!-- SVG de rosto anônimo -->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-400">
                                 <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
                             </svg>
                         </div>
                         <div class="card bg-gray-300 rounded-lg shadow-md flex items-center justify-center text-gray-500 font-bold">
-                            <!-- SVG de rosto anônimo -->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-400">
                                 <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
                             </svg>
                         </div>
                         <div class="card bg-gray-300 rounded-lg shadow-md flex items-center justify-center text-gray-500 font-bold">
-                            <!-- SVG de rosto anônimo -->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-400">
                                 <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
                             </svg>
@@ -164,117 +164,125 @@
                 <p><span class="font-bold">Apartamento:</span> <span id="confirmedApartamento"></span></p>
             </div>
             <div class="flex flex-col space-y-2">
-                <div class="flex items-center">
-                    <input type="checkbox" id="sendEmailCheckbox" class="form-checkbox text-blue-600 h-4 w-4">
-                    <label for="sendEmailCheckbox" class="ml-2 text-sm font-medium text-gray-700">Enviar dados por e-mail?</label>
-                </div>
-                <div id="emailInputContainer" class="hidden">
-                    <input type="email" id="email" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="exemplo@exemplo.com">
-                </div>
-                <button id="gerarDadosBtn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed">
-                    Enviar por E-mail e Gerar Dados
+                <button id="confirmYesBtn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                    Sim, estes são meus dados
+                </button>
+                <button id="confirmNoBtn" class="w-full bg-red-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200">
+                    Não, não são meus dados
                 </button>
             </div>
             <div id="confirmationMessageBox" class="mt-4 p-3 rounded-md text-sm text-center hidden"></div>
         </div>
-        
-        <!-- Seção do Gerador de Dados - Escondida por padrão -->
+
+        <!-- Seção de Geração de Dados - Visível após confirmação -->
         <div id="generatorSection" class="space-y-4 hidden">
-            <div>
-                <label for="condominio" class="block text-sm font-medium text-gray-700">Condomínio</label>
-                <select id="condominio" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                    <option value="">Selecione um condomínio...</option>
-                    <option value="BENDORF">BENDORF</option>
-                    <option value="BRISAS DA SERRA 1 [1-4]">BRISAS DA SERRA 1 [1-4]</option>
-                    <option value="BRISAS DA SERRA 2 [5-27]">BRISAS DA SERRA 2 [5-27]</option>
-                    <option value="CASA BRANCA">CASA BRANCA</option>
-                    <option value="CANTO DO SABIÁ">CANTO DO SABIÁ</option>
-                    <option value="CHAPADA DOS LÍRIOS">CHAPADA DOS LÍRIOS</option>
-                    <option value="CHAPADA PANTANAL">CHAPADA PANTANAL</option>
-                    <option value="COSTA DO CACAU">COSTA DO CACAU</option>
-                    <option value="ECOVILAGGIO">ECOVILAGGIO</option>
-                    <option value="PONTO GARDÊNIA">PONTO GARDÊNIA</option>
-                    <option value="GRANCLUB">GRANCLUB</option>
-                    <option value="GRAN SONATA">GRAN SONATA</option>
-                    <option value="GRAN VALEY">GRAN VALEY</option>
-                    <option value="JOINVILLE">JOINVILLE</option>
-                    <option value="LAGOA DAS ESMERALDAS">LAGOA DAS ESMERALDAS</option>
-                    <option value="LIBRA">LIBRA</option>
-                    <option value="LUZ DO CAMPO">LUZ DO CAMPO</option>
-                    <option value="MAIS PARK">MAIS PARK</option>
-                    <option value="MARAJÓ">MARAJÓ</option>
-                    <option value="BOSQUE DAS MARGARIDAS">BOSQUE DAS MARGARIDAS</option>
-                    <option value="MATA ATLÂNTICA">MATA ATLÂNTICA</option>
-                    <option value="MORADA CARIOCA">MORADA CARIOCA</option>
-                    <option value="MORADA DAS TORRES - CLUB">MORADA DAS TORRES - CLUB</option>
-                    <option value="MORADA DE MINAS">MORADA DE MINAS</option>
-                    <option value="MORADA DAS TORRES SP">MORADA DAS TORRES SP</option>
-                    <option value="MORADA PREMIUM">MORADA PREMIUM</option>
-                    <option value="MUSIQUE">MUSIQUE</option>
-                    <option value="PARQUE DAS NAÇÕES">PARQUE DAS NAÇÕES</option>
-                    <option value="PLAZA NORTE">PLAZA NORTE</option>
-                    <option value="LISBOA">LISBOA</option>
-                    <option value="PORTO DOURADO 2">PORTO DOURADO 2</option>
-                    <option value="PORTO DOURADO 3">PORTO DOURADO 3</option>
-                    <option value="RESIDENCIAL SABIÁ">RESIDENCIAL SABIÁ</option>
-                    <option value="RIVERA LIFE">RIVERA LIFE</option>
-                    <option value="RUBIS">RUBIS</option>
-                    <option value="SAN FELIPPO">SAN FELIPPO</option>
-                    <option value="SÃO FRANCISCO">SÃO FRANCISCO</option>
-                    <option value="SOLAR DOS MONTES">SOLAR DOS MONTES</option>
-                    <option value="SOL DO ENGENHO">SOL DO ENGENHO</option>
-                    <option value="SPAZIO SALVADOR NORTE">SPAZIO SALVADOR NORTE</option>
-                    <option value="SPAZIO SINGULAR">SPAZIO SINGULAR</option>
-                    <option value="JARDIM TIRADENTES">JARDIM TIRADENTES</option>
-                    <option value="VIC PARK MONTREAL">VIC PARK MONTREAL</option>
-                    <option value="VILA DIAMANTE">VILA DIAMANTE</option>
-                    <option value="VILA REAL ESMERALDA">VILA REAL ESMERALDA</option>
-                    <option value="VILLAS VILLAGE">VILLAS VILLAGE</option>
-                    <option value="RESERVA BARRA FUNDA">RESERVA BARRA FUNDA</option>
-                    <option value="VIVER FAMA">VIVER FAMA</option>
-                    <option value="BOSQUE DAS ÁGUAS">BOSQUE DAS ÁGUAS</option>
-                    <option value="BOSQUE DA RIBEIRA">BOSQUE DA RIBEIRA</option>
-                    <option value="ESTRELA DE CRISTAL">ESTRELA DE CRISTAL</option>
-                    <option value="FONTANA">FONTANA</option>
-                    <option value="GOLDEN PLAZA">GOLDEN PLAZA</option>
-                    <option value="GREENVILLE">GREENVILLE</option>
-                    <option value="LAGUNA">LAGUNA</option>
-                    <option value="RECANTO DOS ABRANTES">RECANTO DOS ABRANTES</option>
-                    <option value="XINGÚ">XINGÚ</option>
-                    <option value="SERRA DOS PINHAIS">SERRA DOS PINHAIS</option>
-                    <option value="PONTO DIAMANTE">PONTO DIAMANTE</option>
-                    <option value="PONTO VEREDAS">PONTO VEREDAS</option>
-                    <option value="VILLAGE EUROPA">VILLAGE EUROPA</option>
-                </select>
-            </div>
-
-            <div>
-                <label for="bloco" class="block text-sm font-medium text-gray-700">Bloco</label>
-                <input type="text" id="bloco" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-            </div>
-
-            <div>
-                <label for="apartamento" class="block text-sm font-medium text-gray-700">Apartamento</label>
-                <input type="text" id="apartamento" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Ponto</label>
-                <div class="flex space-x-4">
-                    <label class="inline-flex items-center">
-                        <input type="radio" name="ponto" value="1" class="form-radio text-blue-600" checked>
-                        <span class="ml-2 text-gray-700">Primeiro Ponto</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                        <input type="radio" name="ponto" value="2" class="form-radio text-blue-600">
-                        <span class="ml-2 text-gray-700">Segundo Ponto</span>
-                    </label>
+            <div class="flex flex-col space-y-2">
+                <div>
+                    <label for="condominio" class="block text-sm font-medium text-gray-700">Condomínio</label>
+                    <select id="condominio" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <option value="">Selecione um condomínio...</option>
+                        <option value="BENDORF">BENDORF</option>
+                        <option value="BRISAS DA SERRA 1 [1-4]">BRISAS DA SERRA 1 [1-4]</option>
+                        <option value="BRISAS DA SERRA 2 [5-27]">BRISAS DA SERRA 2 [5-27]</option>
+                        <option value="CASA BRANCA">CASA BRANCA</option>
+                        <option value="CANTO DO SABIÁ">CANTO DO SABIÁ</option>
+                        <option value="CHAPADA DOS LÍRIOS">CHAPADA DOS LÍRIOS</option>
+                        <option value="CHAPADA PANTANAL">CHAPADA PANTANAL</option>
+                        <option value="COSTA DO CACAU">COSTA DO CACAU</option>
+                        <option value="ECOVILAGGIO">ECOVILAGGIO</option>
+                        <option value="PONTO GARDÊNIA">PONTO GARDÊNIA</option>
+                        <option value="GRANCLUB">GRANCLUB</option>
+                        <option value="GRAN SONATA">GRAN SONATA</option>
+                        <option value="GRAN VALEY">GRAN VALEY</option>
+                        <option value="JOINVILLE">JOINVILLE</option>
+                        <option value="LAGOA DAS ESMERALDAS">LAGOA DAS ESMERALDAS</option>
+                        <option value="LIBRA">LIBRA</option>
+                        <option value="LUZ DO CAMPO">LUZ DO CAMPO</option>
+                        <option value="MAIS PARK">MAIS PARK</option>
+                        <option value="MARAJÓ">MARAJÓ</option>
+                        <option value="BOSQUE DAS MARGARIDAS">BOSQUE DAS MARGARIDAS</option>
+                        <option value="MATA ATLÂNTICA">MATA ATLÂNTICA</option>
+                        <option value="MORADA CARIOCA">MORADA CARIOCA</option>
+                        <option value="MORADA DAS TORRES - CLUB">MORADA DAS TORRES - CLUB</option>
+                        <option value="MORADA DE MINAS">MORADA DE MINAS</option>
+                        <option value="MORADA DAS TORRES SP">MORADA DAS TORRES SP</option>
+                        <option value="MORADA PREMIUM">MORADA PREMIUM</option>
+                        <option value="MUSIQUE">MUSIQUE</option>
+                        <option value="PARQUE DAS NAÇÕES">PARQUE DAS NAÇÕES</option>
+                        <option value="PLAZA NORTE">PLAZA NORTE</option>
+                        <option value="LISBOA">LISBOA</option>
+                        <option value="PORTO DOURADO 2">PORTO DOURADO 2</option>
+                        <option value="PORTO DOURADO 3">PORTO DOURADO 3</option>
+                        <option value="RESIDENCIAL SABIÁ">RESIDENCIAL SABIÁ</option>
+                        <option value="RIVERA LIFE">RIVERA LIFE</option>
+                        <option value="RUBIS">RUBIS</option>
+                        <option value="SAN FELIPPO">SAN FELIPPO</option>
+                        <option value="SÃO FRANCISCO">SÃO FRANCISCO</option>
+                        <option value="SOLAR DOS MONTES">SOLAR DOS MONTES</option>
+                        <option value="SOL DO ENGENHO">SOL DO ENGENHO</option>
+                        <option value="SPAZIO SALVADOR NORTE">SPAZIO SALVADOR NORTE</option>
+                        <option value="SPAZIO SINGULAR">SPAZIO SINGULAR</option>
+                        <option value="JARDIM TIRADENTES">JARDIM TIRADENTES</option>
+                        <option value="VIC PARK MONTREAL">VIC PARK MONTREAL</option>
+                        <option value="VILA DIAMANTE">VILA DIAMANTE</option>
+                        <option value="VILA REAL ESMERALDA">VILA REAL ESMERALDA</option>
+                        <option value="VILLAS VILLAGE">VILLAS VILLAGE</option>
+                        <option value="RESERVA BARRA FUNDA">RESERVA BARRA FUNDA</option>
+                        <option value="VIVER FAMA">VIVER FAMA</option>
+                        <option value="BOSQUE DAS ÁGUAS">BOSQUE DAS ÁGUAS</option>
+                        <option value="BOSQUE DA RIBEIRA">BOSQUE DA RIBEIRA</option>
+                        <option value="ESTRELA DE CRISTAL">ESTRELA DE CRISTAL</option>
+                        <option value="FONTANA">FONTANA</option>
+                        <option value="GOLDEN PLAZA">GOLDEN PLAZA</option>
+                        <option value="GREENVILLE">GREENVILLE</option>
+                        <option value="LAGUNA">LAGUNA</option>
+                        <option value="RECANTO DOS ABRANTES">RECANTO DOS ABRANTES</option>
+                        <option value="XINGÚ">XINGÚ</option>
+                        <option value="SERRA DOS PINHAIS">SERRA DOS PINHAIS</option>
+                        <option value="PONTO DIAMANTE">PONTO DIAMANTE</option>
+                        <option value="PONTO VEREDAS">PONTO VEREDAS</option>
+                        <option value="VILLAGE EUROPA">VILLAGE EUROPA</option>
+                    </select>
                 </div>
+    
+                <div>
+                    <label for="bloco" class="block text-sm font-medium text-gray-700">Bloco</label>
+                    <input type="text" id="bloco" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+    
+                <div>
+                    <label for="apartamento" class="block text-sm font-medium text-gray-700">Apartamento</label>
+                    <input type="text" id="apartamento" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+    
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Ponto</label>
+                    <div class="flex space-x-4">
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="ponto" value="1" class="form-radio text-blue-600" checked>
+                            <span class="ml-2 text-gray-700">Primeiro Ponto</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="ponto" value="2" class="form-radio text-blue-600">
+                            <span class="ml-2 text-gray-700">Segundo Ponto</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="sendEmailCheckbox" class="form-checkbox text-blue-600 h-4 w-4">
+                        <label for="sendEmailCheckbox" class="ml-2 text-sm font-medium text-gray-700">Enviar dados por e-mail?</label>
+                    </div>
+                </div>
+                
+                <div id="emailInputContainer" class="mt-2 hidden">
+                    <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
+                    <input type="email" id="email" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="exemplo@exemplo.com">
+                </div>
+                <button id="gerarDadosManualmenteBtn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                    GERAR DADOS
+                </button>
             </div>
-
-            <button id="gerarDadosManualmenteBtn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
-                GERAR DADOS
-            </button>
         </div>
 
         <!-- Campos de Saída -->
@@ -452,17 +460,13 @@
         const apartamentoInput = document.getElementById('apartamento');
 
         const dataConfirmationSection = document.getElementById('dataConfirmationSection');
+        const confirmedDataDisplay = document.getElementById('confirmedDataDisplay');
         const confirmedCondominio = document.getElementById('confirmedCondominio');
         const confirmedBloco = document.getElementById('confirmedBloco');
         const confirmedApartamento = document.getElementById('confirmedApartamento');
+        const confirmYesBtn = document.getElementById('confirmYesBtn');
         const confirmNoBtn = document.getElementById('confirmNoBtn');
         const emailMessage = document.getElementById('emailMessage');
-        const gerarDadosBtn = document.getElementById('gerarDadosBtn');
-        const tryAgainBtn = document.getElementById('tryAgainBtn');
-        const whatsappLinkBtn = document.getElementById('whatsappLinkBtn');
-        const mainButtonsContainer = document.getElementById('mainButtonsContainer');
-        const dataConfirmationButtons = document.getElementById('dataConfirmationButtons');
-
 
         // Variáveis para armazenar os dados puxados da simulação
         let pulledCondominio = "";
@@ -560,76 +564,46 @@
         });
 
         // Evento para o botão de confirmação "Sim, estes são meus dados"
-        gerarDadosBtn.addEventListener('click', () => {
-             // Preenche os campos do gerador com os dados puxados
-            condominioSelect.value = pulledCondominio;
-            blocoInput.value = pulledBloco;
-            apartamentoInput.value = pulledApartamento;
-
-            // Gera os dados
-            const ponto = document.querySelector('input[name="ponto"]:checked').value;
-            const condominio = condominioSelect.value;
-            const bloco = blocoInput.value.trim();
-            const apartamento = apartamentoInput.value.trim();
-            const sendEmail = sendEmailCheckbox.checked;
-            const email = emailInput.value.trim();
-
-            const condominioInfo = condominiumData[condominio];
-            const usuario = `${bloco}${apartamento}${ponto}`;
-            
-            let senha;
-            if (specialPasswordCondos.includes(condominio)) {
-                senha = condominioInfo.passwordPrefix;
-            } else if (condominio === "RESERVA BARRA FUNDA" && condominioInfo.passwordPrefix) {
-                senha = `${condominioInfo.passwordPrefix}${bloco}${apartamento}0${ponto}`;
-            } else {
-                senha = `${condominioInfo.passwordPrefix}${bloco}${apartamento}${ponto}`;
-            }
-            const dominio = condominioInfo.domain;
-            
-            // Exibe mensagem de envio se a checkbox estiver marcada
-            if (sendEmail && validateEmail(email)) {
-                showMessage(emailMessage, "Enviando...", "info");
-                 setTimeout(() => {
-                    showMessage(emailMessage, "Dados enviados para o e-mail!", "success");
-                }, 3000); // Exibe por 3 segundos para não atrasar a geração de dados
-            }
-
-            // Exibição dos dados gerados
-            document.getElementById('usuarioOutput').value = usuario;
-            document.getElementById('senhaOutput').value = senha;
-            document.getElementById('dominioOutput').value = dominio;
-            outputSection.classList.remove('hidden');
-            hideMessage(messageBox);
-            
-            // Atualiza as instruções de uso com os dados gerados
-            document.querySelector('#instrucaoFisico code').textContent = `${bloco}${apartamento}`;
-            document.querySelector('#instrucaoInteligente code').textContent = `${usuario}`;
-            infoSection.classList.remove('hidden');
-
+        confirmYesBtn.addEventListener('click', () => {
+            // Exibe a seção de geração de dados
             dataConfirmationSection.classList.add('hidden');
+            generatorSection.classList.remove('hidden');
         });
 
         // Evento para o botão de confirmação "Não, não são meus dados"
         confirmNoBtn.addEventListener('click', () => {
              // Esconde a seção de confirmação e exibe a mensagem de suporte
             dataConfirmationSection.classList.add('hidden');
-            const whatsappLinkDiv = `
-                <div class="mt-4 p-4 bg-gray-100 rounded-lg shadow-sm border border-gray-200 text-center">
-                    <p class="font-semibold text-gray-800 mb-2">Ficou com alguma dúvida?</p>
-                    <p class="text-sm">
-                        Se os dados não estão corretos, por favor, acione o suporte técnico:
-                    </p>
+            authSection.classList.remove('hidden');
+            avancarBtn.classList.remove('hidden');
+            devSkipBtn.classList.remove('hidden');
+            
+            // Adiciona o botão de tentar novamente e de suporte
+            authMessageBox.innerHTML = `
+                <p class="text-sm text-red-700 bg-red-100 p-3 rounded-md text-center">
+                    Os dados não estão corretos. Por favor, tente novamente ou acione o suporte.
+                </p>
+                <div class="mt-4 flex flex-col items-center">
+                    <button id="tryAgainBtn" class="w-full md:w-1/2 bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                        Tentar Novamente
+                    </button>
+                    <p class="font-semibold text-gray-800 mb-2 mt-4">Ou...</p>
                     <a href="https://wa.me/551140205322" target="_blank" class="mt-2 inline-block px-4 py-2 bg-green-500 text-white font-medium text-sm rounded-md shadow-md hover:bg-green-600 transition-colors duration-200">
-                        Abrir WhatsApp
+                        Ficou com alguma dúvida?
                     </a>
                 </div>
             `;
-            authMessageBox.innerHTML = whatsappLinkDiv;
             authMessageBox.classList.remove('hidden');
-            authSection.classList.remove('hidden');
-            // Esconde o botão avançar para forçar o usuário a ir para o whats app
-            avancarBtn.classList.add('hidden');
+            
+            // Adiciona o evento para o novo botão de tentar novamente
+            document.getElementById('tryAgainBtn').addEventListener('click', () => {
+                 authSection.classList.remove('hidden');
+                 authMessageBox.classList.add('hidden');
+            });
+
+            // Esconde os botões Avançar e Pular da tela de autenticação enquanto o aviso está na tela
+            document.getElementById('avancarBtn').classList.add('hidden');
+            document.getElementById('devSkipBtn').classList.add('hidden');
         });
 
         // Evento para "Tentar Novamente"
@@ -647,7 +621,7 @@
                 setTimeout(() => {
                     const sanitizedCpf = cpf.replace(/\D/g, '');
                     if (sanitizedCpf === "12345678900") { // CPF de teste para simular erro
-                        resolve({ success: false, message: "Não foi possível encontrar seus dados no banco de dados. Por favor, acione o suporte técnico.", linkWhatsApp: true });
+                        resolve({ success: false, message: "Não foi possível encontrar seus dados no banco de dados.", linkWhatsApp: true });
                     } else {
                         const mockData = {
                             condominio: "BENDORF", 
@@ -664,12 +638,10 @@
         sendEmailCheckbox.addEventListener('change', () => {
             if (sendEmailCheckbox.checked) {
                 emailInputContainer.classList.remove('hidden');
-                gerarDadosBtn.textContent = 'Enviar por E-mail e Gerar Dados';
                 gerarDadosBtn.disabled = !validateEmail(emailInput.value);
             } else {
                 emailInputContainer.classList.add('hidden');
                 emailMessage.classList.add('hidden');
-                gerarDadosBtn.textContent = 'Gerar Dados';
                 gerarDadosBtn.disabled = false;
             }
         });
