@@ -150,6 +150,19 @@
                 </div>
             </div>
 
+            <!-- Nova seção para envio de e-mail -->
+            <div class="mt-4">
+                <label class="inline-flex items-center">
+                    <input type="checkbox" id="sendEmailCheckbox" class="form-checkbox text-blue-600">
+                    <span class="ml-2 text-gray-700">Enviar dados por e-mail?</span>
+                </label>
+            </div>
+            
+            <div id="emailInputContainer" class="mt-4 hidden">
+                <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
+                <input type="email" id="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="exemplo@exemplo.com">
+            </div>
+
             <button id="gerarDadosBtn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
                 GERAR DADOS
             </button>
@@ -280,6 +293,28 @@
         const authMessageBox = document.getElementById('authMessageBox');
         const messageBox = document.getElementById('messageBox');
         const loadingSpinner = document.getElementById('loadingSpinner');
+        const sendEmailCheckbox = document.getElementById('sendEmailCheckbox');
+        const emailInputContainer = document.getElementById('emailInputContainer');
+        const emailInput = document.getElementById('email');
+        const cpfInput = document.getElementById('cpf');
+        const numeroInput = document.getElementById('numero');
+
+        // Função de máscara para CPF
+        cpfInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+            value = value.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona o primeiro ponto
+            value = value.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona o segundo ponto
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona o traço
+            e.target.value = value;
+        });
+
+        // Função de máscara para Número de Telefone
+        numeroInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+            value = value.replace(/^(\d{2})(\d)/g, '($1) $2'); // Adiciona parênteses e espaço
+            value = value.replace(/(\d)(\d{4})$/, '$1-$2'); // Adiciona traço
+            e.target.value = value;
+        });
 
         // Evento para o botão "Avançar"
         avancarBtn.addEventListener('click', async () => {
@@ -334,20 +369,64 @@
             });
         }
 
+        // Evento para mostrar/esconder o campo de e-mail e atualizar o texto do botão
+        sendEmailCheckbox.addEventListener('change', () => {
+            if (sendEmailCheckbox.checked) {
+                emailInputContainer.classList.remove('hidden');
+                updateGerarDadosBtn();
+            } else {
+                emailInputContainer.classList.add('hidden');
+                gerarDadosBtn.textContent = 'GERAR DADOS';
+            }
+        });
+
+        // Evento para validar o e-mail e atualizar o texto do botão
+        emailInput.addEventListener('input', updateGerarDadosBtn);
+
+        function updateGerarDadosBtn() {
+            if (sendEmailCheckbox.checked) {
+                const emailValid = validateEmail(emailInput.value);
+                if (emailValid) {
+                    gerarDadosBtn.textContent = 'ENVIAR DADOS';
+                    gerarDadosBtn.disabled = false;
+                } else {
+                    gerarDadosBtn.textContent = 'ENVIAR DADOS';
+                    gerarDadosBtn.disabled = true; // Desabilita o botão se o e-mail for inválido
+                }
+            } else {
+                gerarDadosBtn.textContent = 'GERAR DADOS';
+                gerarDadosBtn.disabled = false;
+            }
+        }
+
+        function validateEmail(email) {
+            // Expressão regular para validar o formato de e-mail
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(String(email).toLowerCase());
+        }
+
         // Evento para o botão "GERAR DADOS" (lógica existente)
         gerarDadosBtn.addEventListener('click', () => {
             const condominio = document.getElementById('condominio').value;
             const bloco = document.getElementById('bloco').value.trim();
             const apartamento = document.getElementById('apartamento').value.trim();
             const ponto = document.querySelector('input[name="ponto"]:checked').value;
+            const sendEmail = sendEmailCheckbox.checked;
+            const email = emailInput.value.trim();
 
-            // Validação simples
+            // Validação
             if (!bloco || !apartamento || !condominio) {
                 showMessage(messageBox, "Por favor, preencha todos os campos.", "error");
                 outputSection.classList.add('hidden');
                 return;
             }
 
+            if (sendEmail && !validateEmail(email)) {
+                showMessage(messageBox, "Por favor, insira um e-mail válido.", "error");
+                outputSection.classList.add('hidden');
+                return;
+            }
+            
             const condominioInfo = condominiumData[condominio];
             if (!condominioInfo) {
                 showMessage(messageBox, "Condomínio não encontrado. Por favor, selecione um válido.", "error");
@@ -377,6 +456,13 @@
             document.getElementById('dominioOutput').value = dominio;
             outputSection.classList.remove('hidden');
             hideMessage(messageBox);
+
+            // Ação de enviar e-mail (simulada)
+            if (sendEmail) {
+                // Aqui você implementaria a lógica real para enviar o e-mail
+                console.log(`Simulando envio de e-mail para ${email} com os dados gerados.`);
+                showMessage(messageBox, "Dados gerados e enviados para o e-mail!", "success");
+            }
         });
 
         // Eventos para os botões de copiar
