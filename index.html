@@ -39,18 +39,13 @@
         }
         
         /* Estilos da nova animação de carregamento */
-        .loading-animation-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .loading-animation {
+        .search-animation {
             position: relative;
-            width: 80px;
+            width: 150px;
             height: 80px;
+            overflow: hidden;
         }
-        .loading-animation .icon-magnifier {
+        .search-animation .icon-magnifier {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -58,26 +53,28 @@
             width: 40px;
             height: 40px;
             fill: #3b82f6;
-            animation: magnifier-bounce 1.5s infinite ease-in-out;
+            z-index: 10;
         }
-        .loading-animation .icon-database {
+        .search-animation .card-group {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            fill: #4b5563;
-            animation: database-pulse 1.5s infinite ease-in-out;
-            opacity: 0.3;
+            top: 0;
+            left: 100%;
+            display: flex;
+            gap: 10px;
+            animation: card-slide 3s linear infinite;
         }
-        @keyframes magnifier-bounce {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -60%) scale(1.1); }
+        .search-animation .card {
+            width: 50px;
+            height: 70px;
+            background-color: #cbd5e1;
+            border-radius: 6px;
+            border: 1px solid #94a3b8;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        @keyframes database-pulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.5; }
+        @keyframes card-slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-200%); }
         }
     </style>
 </head>
@@ -124,13 +121,32 @@
             
             <!-- Nova animação de carregamento -->
             <div id="loadingAnimation" class="hidden loading-animation-container mt-4">
-                <div class="loading-animation">
-                    <svg class="icon-database" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-12c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
-                    </svg>
-                    <svg class="icon-magnifier" viewBox="0 0 24 24">
-                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                    </svg>
+                <div class="search-animation">
+                    <div class="icon-magnifier">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                    </div>
+                    <div class="card-group">
+                        <div class="card bg-gray-300 rounded-lg shadow-md flex items-center justify-center text-gray-500 font-bold">
+                            <!-- SVG de rosto anônimo -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-400">
+                                <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="card bg-gray-300 rounded-lg shadow-md flex items-center justify-center text-gray-500 font-bold">
+                            <!-- SVG de rosto anônimo -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-400">
+                                <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="card bg-gray-300 rounded-lg shadow-md flex items-center justify-center text-gray-500 font-bold">
+                            <!-- SVG de rosto anônimo -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-400">
+                                <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </div>
                 </div>
                 <span class="mt-4 text-gray-700 text-sm font-medium text-center">Aguarde um momentinho enquanto localizamos o seu cadastro.</span>
             </div>
@@ -147,17 +163,21 @@
                 <p><span class="font-bold">Bloco:</span> <span id="confirmedBloco"></span></p>
                 <p><span class="font-bold">Apartamento:</span> <span id="confirmedApartamento"></span></p>
             </div>
-            <div class="flex space-x-4">
-                <button id="confirmYesBtn" class="flex-1 bg-green-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200">
-                    Sim, estes são meus dados
-                </button>
-                <button id="confirmNoBtn" class="flex-1 bg-red-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200">
-                    Não, não são meus dados
+            <div class="flex flex-col space-y-2">
+                <div class="flex items-center">
+                    <input type="checkbox" id="sendEmailCheckbox" class="form-checkbox text-blue-600 h-4 w-4">
+                    <label for="sendEmailCheckbox" class="ml-2 text-sm font-medium text-gray-700">Enviar dados por e-mail?</label>
+                </div>
+                <div id="emailInputContainer" class="hidden">
+                    <input type="email" id="email" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="exemplo@exemplo.com">
+                </div>
+                <button id="gerarDadosBtn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed">
+                    Enviar por E-mail e Gerar Dados
                 </button>
             </div>
             <div id="confirmationMessageBox" class="mt-4 p-3 rounded-md text-sm text-center hidden"></div>
         </div>
-
+        
         <!-- Seção do Gerador de Dados - Escondida por padrão -->
         <div id="generatorSection" class="space-y-4 hidden">
             <div>
@@ -252,26 +272,7 @@
                 </div>
             </div>
 
-            <!-- Nova seção para envio de e-mail -->
-            <div class="mt-4 flex items-center justify-between">
-                <div class="flex items-center">
-                    <input type="checkbox" id="sendEmailCheckbox" class="form-checkbox text-blue-600 h-4 w-4">
-                    <label for="sendEmailCheckbox" class="ml-2 text-sm font-medium text-gray-700">Enviar dados por e-mail?</label>
-                </div>
-            </div>
-            
-            <div id="emailInputContainer" class="mt-2 hidden">
-                <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
-                <div class="flex items-center space-x-2">
-                    <input type="email" id="email" class="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="exemplo@exemplo.com">
-                    <button id="sendEmailBtn" class="bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 text-sm disabled:bg-gray-400 disabled:cursor-not-allowed">
-                        Enviar
-                    </button>
-                </div>
-                <div id="emailMessage" class="mt-2 text-sm text-center"></div>
-            </div>
-
-            <button id="gerarDadosBtn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+            <button id="gerarDadosManualmenteBtn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
                 GERAR DADOS
             </button>
         </div>
@@ -437,11 +438,9 @@
         const infoSection = document.getElementById('infoSection');
         const avancarBtn = document.getElementById('avancarBtn');
         const devSkipBtn = document.getElementById('devSkipBtn');
-        const gerarDadosBtn = document.getElementById('gerarDadosBtn');
-        const sendEmailBtn = document.getElementById('sendEmailBtn');
+        const gerarDadosManualmenteBtn = document.getElementById('gerarDadosManualmenteBtn');
         const authMessageBox = document.getElementById('authMessageBox');
         const messageBox = document.getElementById('messageBox');
-        const emailMessage = document.getElementById('emailMessage');
         const loadingAnimation = document.getElementById('loadingAnimation');
         const sendEmailCheckbox = document.getElementById('sendEmailCheckbox');
         const emailInputContainer = document.getElementById('emailInputContainer');
@@ -456,9 +455,14 @@
         const confirmedCondominio = document.getElementById('confirmedCondominio');
         const confirmedBloco = document.getElementById('confirmedBloco');
         const confirmedApartamento = document.getElementById('confirmedApartamento');
-        const confirmYesBtn = document.getElementById('confirmYesBtn');
         const confirmNoBtn = document.getElementById('confirmNoBtn');
-        const confirmationMessageBox = document.getElementById('confirmationMessageBox');
+        const emailMessage = document.getElementById('emailMessage');
+        const gerarDadosBtn = document.getElementById('gerarDadosBtn');
+        const tryAgainBtn = document.getElementById('tryAgainBtn');
+        const whatsappLinkBtn = document.getElementById('whatsappLinkBtn');
+        const mainButtonsContainer = document.getElementById('mainButtonsContainer');
+        const dataConfirmationButtons = document.getElementById('dataConfirmationButtons');
+
 
         // Variáveis para armazenar os dados puxados da simulação
         let pulledCondominio = "";
@@ -512,10 +516,8 @@
             // Simula uma chamada de API para o IXC Soft (API fictícia)
             const apiResult = await mockIXCSoftApiCall(cpf);
 
-            // Esconde a animação de carregamento e reabilita os botões
+            // Esconde a animação de carregamento
             loadingAnimation.classList.add('hidden');
-            avancarBtn.classList.remove('hidden');
-            devSkipBtn.classList.remove('hidden');
 
             if (apiResult.success) {
                 // Armazena os dados puxados para uso posterior
@@ -544,6 +546,9 @@
                         Abrir WhatsApp
                     </a>`;
                 authMessageBox.innerHTML += whatsappLinkDiv;
+                // Reabilita os botões para que o usuário possa tentar novamente ou pular
+                avancarBtn.classList.remove('hidden');
+                devSkipBtn.classList.remove('hidden');
             }
         });
 
@@ -554,19 +559,58 @@
             hideMessage(authMessageBox);
         });
 
-        // Evento para o botão de confirmação "Sim"
-        confirmYesBtn.addEventListener('click', () => {
-            // Preenche os campos do gerador com os dados puxados
+        // Evento para o botão de confirmação "Sim, estes são meus dados"
+        gerarDadosBtn.addEventListener('click', () => {
+             // Preenche os campos do gerador com os dados puxados
             condominioSelect.value = pulledCondominio;
             blocoInput.value = pulledBloco;
             apartamentoInput.value = pulledApartamento;
+
+            // Gera os dados
+            const ponto = document.querySelector('input[name="ponto"]:checked').value;
+            const condominio = condominioSelect.value;
+            const bloco = blocoInput.value.trim();
+            const apartamento = apartamentoInput.value.trim();
+            const sendEmail = sendEmailCheckbox.checked;
+            const email = emailInput.value.trim();
+
+            const condominioInfo = condominiumData[condominio];
+            const usuario = `${bloco}${apartamento}${ponto}`;
             
-            // Exibe a seção do gerador
+            let senha;
+            if (specialPasswordCondos.includes(condominio)) {
+                senha = condominioInfo.passwordPrefix;
+            } else if (condominio === "RESERVA BARRA FUNDA" && condominioInfo.passwordPrefix) {
+                senha = `${condominioInfo.passwordPrefix}${bloco}${apartamento}0${ponto}`;
+            } else {
+                senha = `${condominioInfo.passwordPrefix}${bloco}${apartamento}${ponto}`;
+            }
+            const dominio = condominioInfo.domain;
+            
+            // Exibe mensagem de envio se a checkbox estiver marcada
+            if (sendEmail && validateEmail(email)) {
+                showMessage(emailMessage, "Enviando...", "info");
+                 setTimeout(() => {
+                    showMessage(emailMessage, "Dados enviados para o e-mail!", "success");
+                }, 3000); // Exibe por 3 segundos para não atrasar a geração de dados
+            }
+
+            // Exibição dos dados gerados
+            document.getElementById('usuarioOutput').value = usuario;
+            document.getElementById('senhaOutput').value = senha;
+            document.getElementById('dominioOutput').value = dominio;
+            outputSection.classList.remove('hidden');
+            hideMessage(messageBox);
+            
+            // Atualiza as instruções de uso com os dados gerados
+            document.querySelector('#instrucaoFisico code').textContent = `${bloco}${apartamento}`;
+            document.querySelector('#instrucaoInteligente code').textContent = `${usuario}`;
+            infoSection.classList.remove('hidden');
+
             dataConfirmationSection.classList.add('hidden');
-            generatorSection.classList.remove('hidden');
         });
 
-        // Evento para o botão de confirmação "Não"
+        // Evento para o botão de confirmação "Não, não são meus dados"
         confirmNoBtn.addEventListener('click', () => {
              // Esconde a seção de confirmação e exibe a mensagem de suporte
             dataConfirmationSection.classList.add('hidden');
@@ -588,6 +632,15 @@
             avancarBtn.classList.add('hidden');
         });
 
+        // Evento para "Tentar Novamente"
+        function tryAgain() {
+            authSection.classList.remove('hidden');
+            dataConfirmationSection.classList.add('hidden');
+            hideMessage(authMessageBox);
+            avancarBtn.classList.remove('hidden');
+            devSkipBtn.classList.remove('hidden');
+        }
+
         // Função para simular a chamada de API do IXC Soft e retornar dados
         function mockIXCSoftApiCall(cpf) {
             return new Promise(resolve => {
@@ -607,19 +660,23 @@
             });
         }
         
-        // Evento para mostrar/esconder o campo de e-mail e atualizar o texto do botão
+        // Evento para mostrar/esconder o campo de e-mail e habilitar o botão de geração
         sendEmailCheckbox.addEventListener('change', () => {
             if (sendEmailCheckbox.checked) {
                 emailInputContainer.classList.remove('hidden');
+                gerarDadosBtn.textContent = 'Enviar por E-mail e Gerar Dados';
+                gerarDadosBtn.disabled = !validateEmail(emailInput.value);
             } else {
                 emailInputContainer.classList.add('hidden');
                 emailMessage.classList.add('hidden');
+                gerarDadosBtn.textContent = 'Gerar Dados';
+                gerarDadosBtn.disabled = false;
             }
         });
 
-        // Evento para validar o e-mail e habilitar o botão de envio
+        // Evento para validar o e-mail e habilitar o botão de geração
         emailInput.addEventListener('input', () => {
-            sendEmailBtn.disabled = !validateEmail(emailInput.value);
+            gerarDadosBtn.disabled = !validateEmail(emailInput.value);
         });
 
         function validateEmail(email) {
@@ -627,9 +684,9 @@
             return re.test(String(email).toLowerCase());
         }
         
-        // Evento para o botão "GERAR DADOS"
-        gerarDadosBtn.addEventListener('click', () => {
-            const condominio = condominioSelect.value;
+        // Evento para o botão "GERAR DADOS" na seção manual
+        gerarDadosManualmenteBtn.addEventListener('click', () => {
+             const condominio = condominioSelect.value;
             const bloco = blocoInput.value.trim();
             const apartamento = apartamentoInput.value.trim();
             const ponto = document.querySelector('input[name="ponto"]:checked').value;
@@ -671,28 +728,6 @@
             document.querySelector('#instrucaoFisico code').textContent = `${bloco}${apartamento}`;
             document.querySelector('#instrucaoInteligente code').textContent = `${usuario}`;
             infoSection.classList.remove('hidden');
-        });
-
-        // Evento para o botão de enviar e-mail
-        sendEmailBtn.addEventListener('click', () => {
-            const email = emailInput.value.trim();
-            if (!validateEmail(email)) {
-                showMessage(emailMessage, "Por favor, insira um e-mail válido.", "error");
-                return;
-            }
-            
-            const usuario = document.getElementById('usuarioOutput').value;
-            const senha = document.getElementById('senhaOutput').value;
-            const dominio = document.getElementById('dominioOutput').value;
-
-            showMessage(emailMessage, "Enviando...", "info");
-            sendEmailBtn.disabled = true;
-
-            setTimeout(() => {
-                console.log(`Simulando envio de e-mail para ${email} com os dados gerados: Usuário=${usuario}, Senha=${senha}, Domínio=${dominio}`);
-                showMessage(emailMessage, "Dados enviados para o e-mail!", "success");
-                sendEmailBtn.disabled = false;
-            }, 15000);
         });
 
         // Eventos para os botões de copiar
