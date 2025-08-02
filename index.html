@@ -38,47 +38,46 @@
             50% { opacity: .5; }
         }
         
-        .card-stack {
+        /* Estilos da nova animação de carregamento */
+        .loading-animation-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .loading-animation {
             position: relative;
-            width: 100px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
         }
-        .card {
+        .loading-animation .icon-magnifier {
             position: absolute;
-            width: 100px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            fill: #3b82f6;
+            animation: magnifier-bounce 1.5s infinite ease-in-out;
+        }
+        .loading-animation .icon-database {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
             height: 60px;
-            background-color: #e2e8f0;
-            border-radius: 8px;
-            border: 1px solid #cbd5e1;
-            transition: transform 0.5s ease-in-out;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            fill: #4b5563;
+            animation: database-pulse 1.5s infinite ease-in-out;
+            opacity: 0.3;
         }
-        .card:nth-child(1) {
-            transform: translateY(0) rotate(0deg);
-            z-index: 3;
-            animation: card-move-1 2s ease-in-out infinite;
+        @keyframes magnifier-bounce {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -60%) scale(1.1); }
         }
-        .card:nth-child(2) {
-            transform: translateY(0) rotate(2deg);
-            z-index: 2;
-            animation: card-move-2 2s ease-in-out infinite;
-        }
-        .card:nth-child(3) {
-            transform: translateY(0) rotate(-2deg);
-            z-index: 1;
-            animation: card-move-3 2s ease-in-out infinite;
-        }
-        @keyframes card-move-1 {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(-5deg); }
-        }
-        @keyframes card-move-2 {
-            0%, 100% { transform: translateY(0) rotate(2deg); }
-            50% { transform: translateY(-10px) rotate(0deg); }
-        }
-        @keyframes card-move-3 {
-            0%, 100% { transform: translateY(0) rotate(-2deg); }
-            50% { transform: translateY(-10px) rotate(5deg); }
+        @keyframes database-pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.5; }
         }
     </style>
 </head>
@@ -122,18 +121,41 @@
                     PULAR (DEV)
                 </button>
             </div>
-
-            <!-- Loading animation -->
-            <div id="loadingAnimation" class="hidden flex flex-col items-center justify-center mt-4">
-                <div class="card-stack">
-                    <div class="card"></div>
-                    <div class="card"></div>
-                    <div class="card"></div>
+            
+            <!-- Nova animação de carregamento -->
+            <div id="loadingAnimation" class="hidden loading-animation-container mt-4">
+                <div class="loading-animation">
+                    <svg class="icon-database" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-12c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                    </svg>
+                    <svg class="icon-magnifier" viewBox="0 0 24 24">
+                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
                 </div>
                 <span class="mt-4 text-gray-700 text-sm font-medium text-center">Aguarde um momentinho enquanto localizamos o seu cadastro.</span>
             </div>
 
             <div id="authMessageBox" class="mt-4 p-3 rounded-md text-sm text-center hidden"></div>
+        </div>
+
+        <!-- Seção de Confirmação de Dados -->
+        <div id="dataConfirmationSection" class="space-y-4 hidden">
+            <h2 class="text-xl font-semibold text-center text-gray-700 mb-4">Confirmação de Dados</h2>
+            <div id="confirmedDataDisplay" class="p-4 bg-gray-100 rounded-lg border border-gray-200">
+                <p class="font-medium">Confirme se estes dados correspondem ao seu endereço:</p>
+                <p><span class="font-bold">Condomínio:</span> <span id="confirmedCondominio"></span></p>
+                <p><span class="font-bold">Bloco:</span> <span id="confirmedBloco"></span></p>
+                <p><span class="font-bold">Apartamento:</span> <span id="confirmedApartamento"></span></p>
+            </div>
+            <div class="flex space-x-4">
+                <button id="confirmYesBtn" class="flex-1 bg-green-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200">
+                    Sim, estes são meus dados
+                </button>
+                <button id="confirmNoBtn" class="flex-1 bg-red-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200">
+                    Não, não são meus dados
+                </button>
+            </div>
+            <div id="confirmationMessageBox" class="mt-4 p-3 rounded-md text-sm text-center hidden"></div>
         </div>
 
         <!-- Seção do Gerador de Dados - Escondida por padrão -->
@@ -378,6 +400,7 @@
             "LUZ DO CAMPO": { domain: "luzdocampo.sp.loomy.srv.br", passwordPrefix: "rmt@luzdocampo" },
             "MORADA PREMIUM": { domain: "moradapremium.ba.loomy.srv.br", passwordPrefix: "rmt@moradapremium" },
             "PARQUE DAS NAÇÕES": { domain: "parquedasnacoes.ba.loomy.srv.br", passwordPrefix: "rmt@parquedasnacoes" },
+            "PORTO DOURADO 2": { domain: "portodourado2.go.loomy.srv.br", passwordPrefix: "rmt@portodourado" },
             "PORTO DOURADO 3": { domain: "portodourado3.go.loomy.srv.br", passwordPrefix: "rmt@portodourado3" },
             "VILLAGE EUROPA": { domain: "villageeuropa.mg.loomy.srv.br", passwordPrefix: "rmt@villageeuropa" },
             "BOSQUE DAS ÁGUAS": { domain: "bosquedasaguas.mg.loomy.srv.br", passwordPrefix: "rmt@bosqueaguas" },
@@ -429,6 +452,19 @@
         const blocoInput = document.getElementById('bloco');
         const apartamentoInput = document.getElementById('apartamento');
 
+        const dataConfirmationSection = document.getElementById('dataConfirmationSection');
+        const confirmedCondominio = document.getElementById('confirmedCondominio');
+        const confirmedBloco = document.getElementById('confirmedBloco');
+        const confirmedApartamento = document.getElementById('confirmedApartamento');
+        const confirmYesBtn = document.getElementById('confirmYesBtn');
+        const confirmNoBtn = document.getElementById('confirmNoBtn');
+        const confirmationMessageBox = document.getElementById('confirmationMessageBox');
+
+        // Variáveis para armazenar os dados puxados da simulação
+        let pulledCondominio = "";
+        let pulledBloco = "";
+        let pulledApartamento = "";
+
         // Função de máscara para CPF
         cpfInput.addEventListener('input', (e) => {
             let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
@@ -468,29 +504,46 @@
                 return;
             }
 
-            // Exibe a animação de carregamento e desabilita os botões
+            // Esconde os botões e exibe a animação de carregamento
+            avancarBtn.classList.add('hidden');
+            devSkipBtn.classList.add('hidden');
             loadingAnimation.classList.remove('hidden');
-            avancarBtn.disabled = true;
-            devSkipBtn.disabled = true;
 
             // Simula uma chamada de API para o IXC Soft (API fictícia)
             const apiResult = await mockIXCSoftApiCall(cpf);
 
             // Esconde a animação de carregamento e reabilita os botões
             loadingAnimation.classList.add('hidden');
-            avancarBtn.disabled = false;
-            devSkipBtn.disabled = false;
+            avancarBtn.classList.remove('hidden');
+            devSkipBtn.classList.remove('hidden');
 
             if (apiResult.success) {
-                // Se a validação for aprovada, preenche os campos do gerador e exibe a seção
-                condominioSelect.value = apiResult.data.condominio;
-                blocoInput.value = apiResult.data.bloco;
-                apartamentoInput.value = apiResult.data.apartamento;
-                
+                // Armazena os dados puxados para uso posterior
+                pulledCondominio = apiResult.data.condominio;
+                pulledBloco = apiResult.data.bloco;
+                pulledApartamento = apiResult.data.apartamento;
+
+                // Exibe a seção de confirmação de dados
                 authSection.classList.add('hidden');
-                generatorSection.classList.remove('hidden');
+                dataConfirmationSection.classList.remove('hidden');
+
+                // Preenche os dados para confirmação
+                confirmedCondominio.textContent = pulledCondominio;
+                confirmedBloco.textContent = pulledBloco;
+                confirmedApartamento.textContent = pulledApartamento;
+
             } else {
                 showMessage(authMessageBox, apiResult.message, "error");
+                // Mostra o link do whatsapp no caso de erro de autenticação
+                const whatsappLinkDiv = `
+                    <p class="font-semibold text-gray-800 mb-2 mt-4">Ficou com alguma dúvida?</p>
+                    <p class="text-sm">
+                        Acione o suporte técnico via WhatsApp:
+                    </p>
+                    <a href="https://wa.me/551140205322" target="_blank" class="mt-2 inline-block px-4 py-2 bg-green-500 text-white font-medium text-sm rounded-md shadow-md hover:bg-green-600 transition-colors duration-200">
+                        Abrir WhatsApp
+                    </a>`;
+                authMessageBox.innerHTML += whatsappLinkDiv;
             }
         });
 
@@ -498,19 +551,51 @@
         devSkipBtn.addEventListener('click', () => {
             authSection.classList.add('hidden');
             generatorSection.classList.remove('hidden');
-            hideMessage(authMessageBox); // Esconde a mensagem de erro caso ela esteja visível
+            hideMessage(authMessageBox);
+        });
+
+        // Evento para o botão de confirmação "Sim"
+        confirmYesBtn.addEventListener('click', () => {
+            // Preenche os campos do gerador com os dados puxados
+            condominioSelect.value = pulledCondominio;
+            blocoInput.value = pulledBloco;
+            apartamentoInput.value = pulledApartamento;
+            
+            // Exibe a seção do gerador
+            dataConfirmationSection.classList.add('hidden');
+            generatorSection.classList.remove('hidden');
+        });
+
+        // Evento para o botão de confirmação "Não"
+        confirmNoBtn.addEventListener('click', () => {
+             // Esconde a seção de confirmação e exibe a mensagem de suporte
+            dataConfirmationSection.classList.add('hidden');
+            const whatsappLinkDiv = `
+                <div class="mt-4 p-4 bg-gray-100 rounded-lg shadow-sm border border-gray-200 text-center">
+                    <p class="font-semibold text-gray-800 mb-2">Ficou com alguma dúvida?</p>
+                    <p class="text-sm">
+                        Se os dados não estão corretos, por favor, acione o suporte técnico:
+                    </p>
+                    <a href="https://wa.me/551140205322" target="_blank" class="mt-2 inline-block px-4 py-2 bg-green-500 text-white font-medium text-sm rounded-md shadow-md hover:bg-green-600 transition-colors duration-200">
+                        Abrir WhatsApp
+                    </a>
+                </div>
+            `;
+            authMessageBox.innerHTML = whatsappLinkDiv;
+            authMessageBox.classList.remove('hidden');
+            authSection.classList.remove('hidden');
+            // Esconde o botão avançar para forçar o usuário a ir para o whats app
+            avancarBtn.classList.add('hidden');
         });
 
         // Função para simular a chamada de API do IXC Soft e retornar dados
         function mockIXCSoftApiCall(cpf) {
             return new Promise(resolve => {
                 setTimeout(() => {
-                    // Simula a busca e retorno dos dados para o CPF
                     const sanitizedCpf = cpf.replace(/\D/g, '');
                     if (sanitizedCpf === "12345678900") { // CPF de teste para simular erro
                         resolve({ success: false, message: "Não foi possível encontrar seus dados no banco de dados. Por favor, acione o suporte técnico.", linkWhatsApp: true });
                     } else {
-                        // Dados fixos para simulação em caso de sucesso
                         const mockData = {
                             condominio: "BENDORF", 
                             bloco: "10",
@@ -538,7 +623,6 @@
         });
 
         function validateEmail(email) {
-            // Expressão regular para validar o formato de e-mail
             const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return re.test(String(email).toLowerCase());
         }
@@ -550,7 +634,6 @@
             const apartamento = apartamentoInput.value.trim();
             const ponto = document.querySelector('input[name="ponto"]:checked').value;
 
-            // Validação
             if (!bloco || !apartamento || !condominio) {
                 showMessage(messageBox, "Por favor, preencha todos os campos.", "error");
                 outputSection.classList.add('hidden');
@@ -566,7 +649,6 @@
                 return;
             }
 
-            // Geração dos dados
             const usuario = `${bloco}${apartamento}${ponto}`;
             
             let senha;
@@ -580,14 +662,12 @@
 
             const dominio = condominioInfo.domain;
 
-            // Exibição dos dados gerados
             document.getElementById('usuarioOutput').value = usuario;
             document.getElementById('senhaOutput').value = senha;
             document.getElementById('dominioOutput').value = dominio;
             outputSection.classList.remove('hidden');
             hideMessage(messageBox);
 
-            // Atualiza as instruções de uso com os dados gerados
             document.querySelector('#instrucaoFisico code').textContent = `${bloco}${apartamento}`;
             document.querySelector('#instrucaoInteligente code').textContent = `${usuario}`;
             infoSection.classList.remove('hidden');
@@ -605,17 +685,14 @@
             const senha = document.getElementById('senhaOutput').value;
             const dominio = document.getElementById('dominioOutput').value;
 
-            // Exibe mensagem de envio
             showMessage(emailMessage, "Enviando...", "info");
             sendEmailBtn.disabled = true;
 
-            // Simula o envio de e-mail por 15 segundos
             setTimeout(() => {
-                // Lógica de envio de e-mail real seria aqui
                 console.log(`Simulando envio de e-mail para ${email} com os dados gerados: Usuário=${usuario}, Senha=${senha}, Domínio=${dominio}`);
                 showMessage(emailMessage, "Dados enviados para o e-mail!", "success");
                 sendEmailBtn.disabled = false;
-            }, 15000); // 15 segundos
+            }, 15000);
         });
 
         // Eventos para os botões de copiar
@@ -636,7 +713,7 @@
 
         function showMessage(element, text, type) {
             element.textContent = text;
-            element.classList.remove('hidden', 'bg-green-100', 'text-green-700', 'bg-red-100', 'text-red-700', 'bg-yellow-100', 'text-yellow-700');
+            element.classList.remove('hidden', 'bg-green-100', 'text-green-700', 'bg-red-100', 'text-red-700', 'bg-yellow-100', 'text-yellow-700', 'animated-pulse');
             if (type === "success") {
                 element.classList.add('bg-green-100', 'text-green-700');
             } else if (type === "error") {
@@ -649,7 +726,7 @@
             if (type !== "info") {
                  setTimeout(() => {
                     element.classList.add('hidden');
-                }, 3000); // Esconde a mensagem após 3 segundos, exceto para "info"
+                }, 3000);
             }
         }
 
