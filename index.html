@@ -12,11 +12,29 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5; /* Cor de fundo suave */
+            background: linear-gradient(135deg, #f0f2f5 0%, #e8edea 50%, #dcdfe3 100%); /* Gradiente de fundo sutil */
+        }
+        
+        /* Estilo para a imagem de logo */
+        .logo-container {
+            max-width: 250px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: auto;
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
+
+    <!-- Logotipo da empresa -->
+    <div class="logo-container">
+        <img src="https://googleusercontent.com/file_content/1" alt="Logotipo Loomy Smart Solutions">
+    </div>
 
     <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 w-full max-w-md mx-auto">
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">GERADOR DE DADOS DO INTERFONE INTELIGENTE</h1>
@@ -312,15 +330,15 @@
         // Função de máscara para Número de Telefone
         numeroInput.addEventListener('input', (e) => {
             let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
-            value = value.slice(0, 11); // Limita a 11 dígitos (incluindo o 9 extra)
+            value = value.slice(0, 11); // Limita a 11 dígitos
             
-            if (value.length > 2 && value.length <= 7) {
-                value = value.replace(/^(\d{2})(\d)/g, '($1) $2'); // DDD + 4 dígitos
-            } else if (value.length > 7) {
-                value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3'); // DDD + 5 dígitos + 4 dígitos
-                value = value.replace(/^(\d{2})(\d{4})(\d{4}).*/, '($1) $2-$3'); // DDD + 4 dígitos + 4 dígitos (pode ser o padrão antigo)
-            } else if (value.length > 0) {
-                 value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+            if (value.length > 2) {
+                value = value.replace(/^(\d{2})(\d)/g, '($1) $2'); // Adiciona parênteses e espaço
+            }
+            if (value.length > 9) {
+                value = value.replace(/(\d{5})(\d{4})$/, '$1-$2'); // Adiciona traço para 9 dígitos
+            } else if (value.length > 8) {
+                value = value.replace(/(\d{4})(\d{4})$/, '$1-$2'); // Adiciona traço para 8 dígitos
             }
 
             e.target.value = value;
@@ -379,6 +397,7 @@
             } else {
                 emailInputContainer.classList.add('hidden');
                 gerarDadosBtn.textContent = 'GERAR DADOS';
+                gerarDadosBtn.disabled = false;
             }
         });
 
