@@ -238,30 +238,31 @@
             <!-- Dados de Saída -->
             <div id="outputSection" class="space-y-4">
                 <h2 class="text-xl font-semibold text-center">Dados Gerados</h2>
+                <!-- LAYOUT RESPONSIVO APLICADO ABAIXO -->
                 <div>
                     <label class="block text-sm font-medium">USUÁRIO</label>
-                    <div class="flex items-center mt-1">
-                        <input type="text" id="usuarioOutput" readonly class="flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-l-md shadow-sm text-white focus:outline-none sm:text-sm">
-                        <button class="copy-btn bg-gray-600 text-white p-2 rounded-r-md border border-l-0 border-gray-600 hover:bg-gray-700 focus:outline-none transition-colors duration-200" data-target="usuarioOutput">
-                            <svg class="copy-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm-1 16H8V7h11v14z"/></svg>
+                    <div class="flex flex-col sm:flex-row items-center mt-1">
+                        <input type="text" id="usuarioOutput" readonly class="w-full sm:flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-md sm:rounded-r-none shadow-sm text-white focus:outline-none sm:text-sm">
+                        <button class="copy-btn w-full sm:w-auto mt-1 sm:mt-0 bg-gray-600 text-white p-2 rounded-md sm:rounded-l-none border border-gray-600 hover:bg-gray-700 focus:outline-none transition-colors duration-200" data-target="usuarioOutput">
+                            <svg class="copy-icon mx-auto" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm-1 16H8V7h11v14z"/></svg>
                         </button>
                     </div>
                 </div>
                 <div>
                     <label class="block text-sm font-medium">SENHA</label>
-                    <div class="flex items-center mt-1">
-                        <input type="text" id="senhaOutput" readonly class="flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-l-md shadow-sm text-white focus:outline-none sm:text-sm">
-                        <button class="copy-btn bg-gray-600 text-white p-2 rounded-r-md border border-l-0 border-gray-600 hover:bg-gray-700 focus:outline-none transition-colors duration-200" data-target="senhaOutput">
-                            <svg class="copy-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm-1 16H8V7h11v14z"/></svg>
+                    <div class="flex flex-col sm:flex-row items-center mt-1">
+                        <input type="text" id="senhaOutput" readonly class="w-full sm:flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-md sm:rounded-r-none shadow-sm text-white focus:outline-none sm:text-sm">
+                        <button class="copy-btn w-full sm:w-auto mt-1 sm:mt-0 bg-gray-600 text-white p-2 rounded-md sm:rounded-l-none border border-gray-600 hover:bg-gray-700 focus:outline-none transition-colors duration-200" data-target="senhaOutput">
+                            <svg class="copy-icon mx-auto" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm-1 16H8V7h11v14z"/></svg>
                         </button>
                     </div>
                 </div>
                 <div>
                     <label class="block text-sm font-medium">DOMÍNIO</label>
-                    <div class="flex items-center mt-1">
-                        <input type="text" id="dominioOutput" readonly class="flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-l-md shadow-sm text-white focus:outline-none sm:text-sm">
-                        <button class="copy-btn bg-gray-600 text-white p-2 rounded-r-md border border-l-0 border-gray-600 hover:bg-gray-700 focus:outline-none transition-colors duration-200" data-target="dominioOutput">
-                            <svg class="copy-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm-1 16H8V7h11v14z"/></svg>
+                    <div class="flex flex-col sm:flex-row items-center mt-1">
+                        <input type="text" id="dominioOutput" readonly class="w-full sm:flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-md sm:rounded-r-none shadow-sm text-white focus:outline-none sm:text-sm">
+                        <button class="copy-btn w-full sm:w-auto mt-1 sm:mt-0 bg-gray-600 text-white p-2 rounded-md sm:rounded-l-none border border-gray-600 hover:bg-gray-700 focus:outline-none transition-colors duration-200" data-target="dominioOutput">
+                            <svg class="copy-icon mx-auto" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm-1 16H8V7h11v14z"/></svg>
                         </button>
                     </div>
                 </div>
@@ -272,9 +273,9 @@
                         <label class="toggle-switch ml-4"><input type="checkbox" id="sendEmailToggle"><span class="slider"></span></label>
                     </div>
                     <div id="emailInputContainer" class="mt-2 hidden">
-                        <div class="flex items-center space-x-2">
-                            <input type="email" id="email" class="flex-1 px-3 py-2 border border-gray-600 bg-gray-700 text-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" placeholder="exemplo@exemplo.com">
-                            <button id="sendEmailBtn" class="bg-green-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200 text-sm disabled:bg-gray-400 disabled:cursor-not-allowed">Enviar</button>
+                        <div class="flex flex-col sm:flex-row items-center sm:space-x-2">
+                            <input type="email" id="email" class="w-full sm:flex-1 px-3 py-2 border border-gray-600 bg-gray-700 text-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" placeholder="exemplo@exemplo.com">
+                            <button id="sendEmailBtn" class="w-full sm:w-auto mt-2 sm:mt-0 bg-green-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200 text-sm disabled:bg-gray-400 disabled:cursor-not-allowed">Enviar</button>
                         </div>
                         <div id="emailMessage" class="message-box hidden"></div>
                     </div>
