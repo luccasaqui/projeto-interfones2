@@ -47,6 +47,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0 auto; /* Centraliza a animação */
         }
         .search-animation .icon-magnifier {
             position: absolute;
@@ -174,101 +175,51 @@
             <div id="confirmationMessageBox" class="mt-4 p-3 rounded-md text-sm text-center hidden"></div>
         </div>
 
-        <!-- Seção de Geração de Dados - Visível após confirmação -->
-        <div id="generatorSection" class="space-y-4 hidden">
-            <div class="flex flex-col space-y-2">
+        <!-- Seção de Geração de Dados - Visível após confirmação "Sim" -->
+        <div id="generationResultsSection" class="space-y-4 hidden">
+             <!-- Dados de Saída -->
+            <div id="outputSection" class="mt-8 space-y-4">
+                <!-- Usuário -->
                 <div>
-                    <label for="condominio" class="block text-sm font-medium text-gray-700">Condomínio</label>
-                    <select id="condominio" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                        <option value="">Selecione um condomínio...</option>
-                        <option value="BENDORF">BENDORF</option>
-                        <option value="BRISAS DA SERRA 1 [1-4]">BRISAS DA SERRA 1 [1-4]</option>
-                        <option value="BRISAS DA SERRA 2 [5-27]">BRISAS DA SERRA 2 [5-27]</option>
-                        <option value="CASA BRANCA">CASA BRANCA</option>
-                        <option value="CANTO DO SABIÁ">CANTO DO SABIÁ</option>
-                        <option value="CHAPADA DOS LÍRIOS">CHAPADA DOS LÍRIOS</option>
-                        <option value="CHAPADA PANTANAL">CHAPADA PANTANAL</option>
-                        <option value="COSTA DO CACAU">COSTA DO CACAU</option>
-                        <option value="ECOVILAGGIO">ECOVILAGGIO</option>
-                        <option value="PONTO GARDÊNIA">PONTO GARDÊNIA</option>
-                        <option value="GRANCLUB">GRANCLUB</option>
-                        <option value="GRAN SONATA">GRAN SONATA</option>
-                        <option value="GRAN VALEY">GRAN VALEY</option>
-                        <option value="JOINVILLE">JOINVILLE</option>
-                        <option value="LAGOA DAS ESMERALDAS">LAGOA DAS ESMERALDAS</option>
-                        <option value="LIBRA">LIBRA</option>
-                        <option value="LUZ DO CAMPO">LUZ DO CAMPO</option>
-                        <option value="MAIS PARK">MAIS PARK</option>
-                        <option value="MARAJÓ">MARAJÓ</option>
-                        <option value="BOSQUE DAS MARGARIDAS">BOSQUE DAS MARGARIDAS</option>
-                        <option value="MATA ATLÂNTICA">MATA ATLÂNTICA</option>
-                        <option value="MORADA CARIOCA">MORADA CARIOCA</option>
-                        <option value="MORADA DAS TORRES - CLUB">MORADA DAS TORRES - CLUB</option>
-                        <option value="MORADA DE MINAS">MORADA DE MINAS</option>
-                        <option value="MORADA DAS TORRES SP">MORADA DAS TORRES SP</option>
-                        <option value="MORADA PREMIUM">MORADA PREMIUM</option>
-                        <option value="MUSIQUE">MUSIQUE</option>
-                        <option value="PARQUE DAS NAÇÕES">PARQUE DAS NAÇÕES</option>
-                        <option value="PLAZA NORTE">PLAZA NORTE</option>
-                        <option value="LISBOA">LISBOA</option>
-                        <option value="PORTO DOURADO 2">PORTO DOURADO 2</option>
-                        <option value="PORTO DOURADO 3">PORTO DOURADO 3</option>
-                        <option value="RESIDENCIAL SABIÁ">RESIDENCIAL SABIÁ</option>
-                        <option value="RIVERA LIFE">RIVERA LIFE</option>
-                        <option value="RUBIS">RUBIS</option>
-                        <option value="SAN FELIPPO">SAN FELIPPO</option>
-                        <option value="SÃO FRANCISCO">SÃO FRANCISCO</option>
-                        <option value="SOLAR DOS MONTES">SOLAR DOS MONTES</option>
-                        <option value="SOL DO ENGENHO">SOL DO ENGENHO</option>
-                        <option value="SPAZIO SALVADOR NORTE">SPAZIO SALVADOR NORTE</option>
-                        <option value="SPAZIO SINGULAR">SPAZIO SINGULAR</option>
-                        <option value="JARDIM TIRADENTES">JARDIM TIRADENTES</option>
-                        <option value="VIC PARK MONTREAL">VIC PARK MONTREAL</option>
-                        <option value="VILA DIAMANTE">VILA DIAMANTE</option>
-                        <option value="VILA REAL ESMERALDA">VILA REAL ESMERALDA</option>
-                        <option value="VILLAS VILLAGE">VILLAS VILLAGE</option>
-                        <option value="RESERVA BARRA FUNDA">RESERVA BARRA FUNDA</option>
-                        <option value="VIVER FAMA">VIVER FAMA</option>
-                        <option value="BOSQUE DAS ÁGUAS">BOSQUE DAS ÁGUAS</option>
-                        <option value="BOSQUE DA RIBEIRA">BOSQUE DA RIBEIRA</option>
-                        <option value="ESTRELA DE CRISTAL">ESTRELA DE CRISTAL</option>
-                        <option value="FONTANA">FONTANA</option>
-                        <option value="GOLDEN PLAZA">GOLDEN PLAZA</option>
-                        <option value="GREENVILLE">GREENVILLE</option>
-                        <option value="LAGUNA">LAGUNA</option>
-                        <option value="RECANTO DOS ABRANTES">RECANTO DOS ABRANTES</option>
-                        <option value="XINGÚ">XINGÚ</option>
-                        <option value="SERRA DOS PINHAIS">SERRA DOS PINHAIS</option>
-                        <option value="PONTO DIAMANTE">PONTO DIAMANTE</option>
-                        <option value="PONTO VEREDAS">PONTO VEREDAS</option>
-                        <option value="VILLAGE EUROPA">VILLAGE EUROPA</option>
-                    </select>
-                </div>
-    
-                <div>
-                    <label for="bloco" class="block text-sm font-medium text-gray-700">Bloco</label>
-                    <input type="text" id="bloco" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                </div>
-    
-                <div>
-                    <label for="apartamento" class="block text-sm font-medium text-gray-700">Apartamento</label>
-                    <input type="text" id="apartamento" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                </div>
-    
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Ponto</label>
-                    <div class="flex space-x-4">
-                        <label class="inline-flex items-center">
-                            <input type="radio" name="ponto" value="1" class="form-radio text-blue-600" checked>
-                            <span class="ml-2 text-gray-700">Primeiro Ponto</span>
-                        </label>
-                        <label class="inline-flex items-center">
-                            <input type="radio" name="ponto" value="2" class="form-radio text-blue-600">
-                            <span class="ml-2 text-gray-700">Segundo Ponto</span>
-                        </label>
+                    <label class="block text-sm font-medium text-gray-700">USUÁRIO</label>
+                    <div class="flex items-center mt-1">
+                        <input type="text" id="usuarioOutput" readonly class="flex-1 px-3 py-2 bg-gray-100 border border-gray-300 rounded-l-md shadow-sm text-gray-900 focus:outline-none sm:text-sm">
+                        <button class="copy-btn bg-gray-200 text-gray-700 py-2 px-4 rounded-r-md border border-l-0 border-gray-300 hover:bg-gray-300 focus:outline-none transition-colors duration-200" data-target="usuarioOutput">
+                            Copiar
+                        </button>
                     </div>
                 </div>
-                <div class="mt-4 flex items-center justify-between">
+
+                <!-- Senha -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">SENHA</label>
+                    <div class="flex items-center mt-1">
+                        <input type="text" id="senhaOutput" readonly class="flex-1 px-3 py-2 bg-gray-100 border border-gray-300 rounded-l-md shadow-sm text-gray-900 focus:outline-none sm:text-sm">
+                        <button class="copy-btn bg-gray-200 text-gray-700 py-2 px-4 rounded-r-md border border-l-0 border-gray-300 hover:bg-gray-300 focus:outline-none transition-colors duration-200" data-target="senhaOutput">
+                            Copiar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Domínio -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">DOMÍNIO</label>
+                    <div class="flex items-center mt-1">
+                        <input type="text" id="dominioOutput" readonly class="flex-1 px-3 py-2 bg-gray-100 border border-gray-300 rounded-l-md shadow-sm text-gray-900 focus:outline-none sm:text-sm">
+                        <button class="copy-btn bg-gray-200 text-gray-700 py-2 px-4 rounded-r-md border border-l-0 border-gray-300 hover:bg-gray-300 focus:outline-none transition-colors duration-200" data-target="dominioOutput">
+                            Copiar
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="messageBox" class="mt-4 p-3 bg-green-100 text-green-700 rounded-md text-sm text-center hidden">
+                    Texto copiado para a área de transferência!
+                </div>
+            </div>
+
+            <!-- Seção de Envio de E-mail e Instruções -->
+            <div id="emailAndInstructionsSection">
+                 <div class="mt-4 flex items-center justify-between">
                     <div class="flex items-center">
                         <input type="checkbox" id="sendEmailCheckbox" class="form-checkbox text-blue-600 h-4 w-4">
                         <label for="sendEmailCheckbox" class="ml-2 text-sm font-medium text-gray-700">Enviar dados por e-mail?</label>
@@ -277,88 +228,50 @@
                 
                 <div id="emailInputContainer" class="mt-2 hidden">
                     <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
-                    <input type="email" id="email" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="exemplo@exemplo.com">
+                    <div class="flex items-center space-x-2">
+                        <input type="email" id="email" class="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="exemplo@exemplo.com">
+                        <button id="sendEmailBtn" class="bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 text-sm disabled:bg-gray-400 disabled:cursor-not-allowed">
+                            Enviar
+                        </button>
+                    </div>
+                    <div id="emailMessage" class="mt-2 text-sm text-center"></div>
                 </div>
-                <button id="gerarDadosManualmenteBtn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
-                    GERAR DADOS
-                </button>
-            </div>
-        </div>
 
-        <!-- Campos de Saída -->
-        <div id="outputSection" class="mt-8 space-y-4 hidden">
-            <!-- Usuário -->
-            <div>
-                <label class="block text-sm font-medium text-gray-700">USUÁRIO</label>
-                <div class="flex items-center mt-1">
-                    <input type="text" id="usuarioOutput" readonly class="flex-1 px-3 py-2 bg-gray-100 border border-gray-300 rounded-l-md shadow-sm text-gray-900 focus:outline-none sm:text-sm">
-                    <button class="copy-btn bg-gray-200 text-gray-700 py-2 px-4 rounded-r-md border border-l-0 border-gray-300 hover:bg-gray-300 focus:outline-none transition-colors duration-200" data-target="usuarioOutput">
-                        Copiar
-                    </button>
+                <div id="infoSection" class="mt-8 space-y-4 text-center text-gray-700">
+                    <div class="flex items-center justify-center p-4 bg-yellow-100 rounded-lg shadow-sm border border-yellow-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.487 0l5.58 9.92c.754 1.346-.246 3.099-1.742 3.099H4.417c-1.496 0-2.498-1.753-1.742-3.099l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                        <p class="text-sm font-medium text-yellow-700">
+                            Se não encontrar o e-mail na sua caixa de entrada, verifique a pasta de lixo eletrônico ou spam.
+                        </p>
+                    </div>
+
+                    <div class="p-6 bg-white rounded-lg border border-gray-200 shadow-md space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Como usar o interfone?</h3>
+                        <ul class="text-left text-sm space-y-2 text-gray-600">
+                            <li class="p-2 bg-gray-50 rounded-md">
+                                Para ligar para a portaria, digite: <code class="font-bold text-gray-800">94</code>
+                            </li>
+                            <li id="instrucaoFisico" class="p-2 bg-gray-50 rounded-md">
+                                Para ligar para o seu interfone físico, digite: <code class="font-bold text-gray-800"></code>
+                            </li>
+                            <li id="instrucaoInteligente" class="p-2 bg-gray-50 rounded-md">
+                                Para ligar no seu interfone inteligente, digite: <code class="font-bold text-gray-800"></code>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 bg-gray-100 rounded-lg shadow-sm border border-gray-200">
+                        <p class="font-semibold text-gray-800 mb-2">Ficou com alguma dúvida?</p>
+                        <p class="text-sm">
+                            Acione o suporte técnico via WhatsApp:
+                        </p>
+                        <a href="https://wa.me/551140205322" target="_blank" class="mt-2 inline-block px-4 py-2 bg-green-500 text-white font-medium text-sm rounded-md shadow-md hover:bg-green-600 transition-colors duration-200">
+                            Abrir WhatsApp
+                        </a>
+                    </div>
                 </div>
-            </div>
-
-            <!-- Senha -->
-            <div>
-                <label class="block text-sm font-medium text-gray-700">SENHA</label>
-                <div class="flex items-center mt-1">
-                    <input type="text" id="senhaOutput" readonly class="flex-1 px-3 py-2 bg-gray-100 border border-gray-300 rounded-l-md shadow-sm text-gray-900 focus:outline-none sm:text-sm">
-                    <button class="copy-btn bg-gray-200 text-gray-700 py-2 px-4 rounded-r-md border border-l-0 border-gray-300 hover:bg-gray-300 focus:outline-none transition-colors duration-200" data-target="senhaOutput">
-                        Copiar
-                    </button>
-                </div>
-            </div>
-
-            <!-- Domínio -->
-            <div>
-                <label class="block text-sm font-medium text-gray-700">DOMÍNIO</label>
-                <div class="flex items-center mt-1">
-                    <input type="text" id="dominioOutput" readonly class="flex-1 px-3 py-2 bg-gray-100 border border-gray-300 rounded-l-md shadow-sm text-gray-900 focus:outline-none sm:text-sm">
-                    <button class="copy-btn bg-gray-200 text-gray-700 py-2 px-4 rounded-r-md border border-l-0 border-gray-300 hover:bg-gray-300 focus:outline-none transition-colors duration-200" data-target="dominioOutput">
-                        Copiar
-                    </button>
-                </div>
-            </div>
-            
-            <div id="messageBox" class="mt-4 p-3 bg-green-100 text-green-700 rounded-md text-sm text-center hidden">
-                Texto copiado para a área de transferência!
-            </div>
-        </div>
-        
-        <!-- Seção de Avisos e Instruções -->
-        <div id="infoSection" class="mt-8 space-y-4 text-center text-gray-700 hidden">
-            <div class="flex items-center justify-center p-4 bg-yellow-100 rounded-lg shadow-sm border border-yellow-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.487 0l5.58 9.92c.754 1.346-.246 3.099-1.742 3.099H4.417c-1.496 0-2.498-1.753-1.742-3.099l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                </svg>
-                <p class="text-sm font-medium text-yellow-700">
-                    Se não encontrar o e-mail na sua caixa de entrada, verifique a pasta de lixo eletrônico ou spam.
-                </p>
-            </div>
-
-            <div class="p-6 bg-white rounded-lg border border-gray-200 shadow-md space-y-4">
-                <h3 class="text-lg font-semibold text-gray-800">Como usar o interfone?</h3>
-                <ul class="text-left text-sm space-y-2 text-gray-600">
-                    <li class="p-2 bg-gray-50 rounded-md">
-                        Para ligar para a portaria, digite: <code class="font-bold text-gray-800">94</code>
-                    </li>
-                    <li id="instrucaoFisico" class="p-2 bg-gray-50 rounded-md">
-                        Para ligar para o seu interfone físico, digite: <code class="font-bold text-gray-800"></code>
-                    </li>
-                    <li id="instrucaoInteligente" class="p-2 bg-gray-50 rounded-md">
-                        Para ligar no seu interfone inteligente, digite: <code class="font-bold text-gray-800"></code>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="p-4 bg-gray-100 rounded-lg shadow-sm border border-gray-200">
-                <p class="font-semibold text-gray-800 mb-2">Ficou com alguma dúvida?</p>
-                <p class="text-sm">
-                    Acione o suporte técnico via WhatsApp:
-                </p>
-                <a href="https://wa.me/551140205322" target="_blank" class="mt-2 inline-block px-4 py-2 bg-green-500 text-white font-medium text-sm rounded-md shadow-md hover:bg-green-600 transition-colors duration-200">
-                    Abrir WhatsApp
-                </a>
             </div>
         </div>
     </div>
@@ -446,7 +359,6 @@
         const infoSection = document.getElementById('infoSection');
         const avancarBtn = document.getElementById('avancarBtn');
         const devSkipBtn = document.getElementById('devSkipBtn');
-        const gerarDadosManualmenteBtn = document.getElementById('gerarDadosManualmenteBtn');
         const authMessageBox = document.getElementById('authMessageBox');
         const messageBox = document.getElementById('messageBox');
         const loadingAnimation = document.getElementById('loadingAnimation');
@@ -455,9 +367,6 @@
         const emailInput = document.getElementById('email');
         const cpfInput = document.getElementById('cpf');
         const numeroInput = document.getElementById('numero');
-        const condominioSelect = document.getElementById('condominio');
-        const blocoInput = document.getElementById('bloco');
-        const apartamentoInput = document.getElementById('apartamento');
 
         const dataConfirmationSection = document.getElementById('dataConfirmationSection');
         const confirmedDataDisplay = document.getElementById('confirmedDataDisplay');
@@ -467,6 +376,9 @@
         const confirmYesBtn = document.getElementById('confirmYesBtn');
         const confirmNoBtn = document.getElementById('confirmNoBtn');
         const emailMessage = document.getElementById('emailMessage');
+        const gerarDadosBtn = document.getElementById('gerarDadosBtn');
+        const sendEmailBtn = document.getElementById('sendEmailBtn');
+
 
         // Variáveis para armazenar os dados puxados da simulação
         let pulledCondominio = "";
@@ -516,6 +428,7 @@
             avancarBtn.classList.add('hidden');
             devSkipBtn.classList.add('hidden');
             loadingAnimation.classList.remove('hidden');
+            hideMessage(authMessageBox);
 
             // Simula uma chamada de API para o IXC Soft (API fictícia)
             const apiResult = await mockIXCSoftApiCall(cpf);
@@ -542,44 +455,50 @@
                 showMessage(authMessageBox, apiResult.message, "error");
                 // Mostra o link do whatsapp no caso de erro de autenticação
                 const whatsappLinkDiv = `
-                    <p class="font-semibold text-gray-800 mb-2 mt-4">Ficou com alguma dúvida?</p>
-                    <p class="text-sm">
-                        Acione o suporte técnico via WhatsApp:
-                    </p>
-                    <a href="https://wa.me/551140205322" target="_blank" class="mt-2 inline-block px-4 py-2 bg-green-500 text-white font-medium text-sm rounded-md shadow-md hover:bg-green-600 transition-colors duration-200">
-                        Abrir WhatsApp
-                    </a>`;
+                    <div class="mt-4 p-4 bg-gray-100 rounded-lg shadow-sm border border-gray-200 text-center">
+                        <p class="font-semibold text-gray-800 mb-2">Ficou com alguma dúvida?</p>
+                        <p class="text-sm">
+                            Acione o suporte técnico via WhatsApp:
+                        </p>
+                        <a href="https://wa.me/551140205322" target="_blank" class="mt-2 inline-block px-4 py-2 bg-green-500 text-white font-medium text-sm rounded-md shadow-md hover:bg-green-600 transition-colors duration-200">
+                            Abrir WhatsApp
+                        </a>
+                    </div>
+                    <button id="tryAgainBtn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 mt-4">
+                        Tentar Novamente
+                    </button>
+                `;
                 authMessageBox.innerHTML += whatsappLinkDiv;
-                // Reabilita os botões para que o usuário possa tentar novamente ou pular
-                avancarBtn.classList.remove('hidden');
-                devSkipBtn.classList.remove('hidden');
+
+                document.getElementById('tryAgainBtn').addEventListener('click', () => {
+                    authSection.classList.remove('hidden');
+                    authMessageBox.classList.add('hidden');
+                    avancarBtn.classList.remove('hidden');
+                    devSkipBtn.classList.remove('hidden');
+                });
             }
         });
 
         // Evento para o botão "PULAR (DEV)"
         devSkipBtn.addEventListener('click', () => {
             authSection.classList.add('hidden');
-            generatorSection.classList.remove('hidden');
+            // Como agora não temos mais a seção de geração manual, vamos para a seção de resultados com dados mockados.
+            generateAndDisplayData("BENDORF", "10", "101");
             hideMessage(authMessageBox);
         });
 
         // Evento para o botão de confirmação "Sim, estes são meus dados"
         confirmYesBtn.addEventListener('click', () => {
-            // Exibe a seção de geração de dados
             dataConfirmationSection.classList.add('hidden');
-            generatorSection.classList.remove('hidden');
+            generateAndDisplayData(pulledCondominio, pulledBloco, pulledApartamento);
         });
 
         // Evento para o botão de confirmação "Não, não são meus dados"
         confirmNoBtn.addEventListener('click', () => {
-             // Esconde a seção de confirmação e exibe a mensagem de suporte
-            dataConfirmationSection.classList.add('hidden');
             authSection.classList.remove('hidden');
-            avancarBtn.classList.remove('hidden');
-            devSkipBtn.classList.remove('hidden');
+            dataConfirmationSection.classList.add('hidden');
             
-            // Adiciona o botão de tentar novamente e de suporte
-            authMessageBox.innerHTML = `
+            showMessage(authMessageBox, `
                 <p class="text-sm text-red-700 bg-red-100 p-3 rounded-md text-center">
                     Os dados não estão corretos. Por favor, tente novamente ou acione o suporte.
                 </p>
@@ -592,27 +511,45 @@
                         Ficou com alguma dúvida?
                     </a>
                 </div>
-            `;
-            authMessageBox.classList.remove('hidden');
-            
-            // Adiciona o evento para o novo botão de tentar novamente
+            `, "error");
+
             document.getElementById('tryAgainBtn').addEventListener('click', () => {
                  authSection.classList.remove('hidden');
                  authMessageBox.classList.add('hidden');
+                 avancarBtn.classList.remove('hidden');
+                 devSkipBtn.classList.remove('hidden');
             });
-
             // Esconde os botões Avançar e Pular da tela de autenticação enquanto o aviso está na tela
             document.getElementById('avancarBtn').classList.add('hidden');
             document.getElementById('devSkipBtn').classList.add('hidden');
         });
 
-        // Evento para "Tentar Novamente"
-        function tryAgain() {
-            authSection.classList.remove('hidden');
-            dataConfirmationSection.classList.add('hidden');
-            hideMessage(authMessageBox);
-            avancarBtn.classList.remove('hidden');
-            devSkipBtn.classList.remove('hidden');
+        // Função para gerar e exibir os dados
+        function generateAndDisplayData(condominio, bloco, apartamento) {
+            const ponto = document.querySelector('input[name="ponto"]:checked').value;
+            const condominioInfo = condominiumData[condominio];
+
+            const usuario = `${bloco}${apartamento}${ponto}`;
+            
+            let senha;
+            if (specialPasswordCondos.includes(condominio)) {
+                senha = condominioInfo.passwordPrefix;
+            } else if (condominio === "RESERVA BARRA FUNDA" && condominioInfo.passwordPrefix) {
+                senha = `${condominioInfo.passwordPrefix}${bloco}${apartamento}0${ponto}`;
+            } else {
+                senha = `${condominioInfo.passwordPrefix}${bloco}${apartamento}${ponto}`;
+            }
+
+            const dominio = condominioInfo.domain;
+
+            document.getElementById('usuarioOutput').value = usuario;
+            document.getElementById('senhaOutput').value = senha;
+            document.getElementById('dominioOutput').value = dominio;
+
+            document.querySelector('#instrucaoFisico code').textContent = `${bloco}${apartamento}`;
+            document.querySelector('#instrucaoInteligente code').textContent = `${usuario}`;
+
+            generationResultsSection.classList.remove('hidden');
         }
 
         // Função para simular a chamada de API do IXC Soft e retornar dados
@@ -634,21 +571,20 @@
             });
         }
         
-        // Evento para mostrar/esconder o campo de e-mail e habilitar o botão de geração
+        // Evento para mostrar/esconder o campo de e-mail e habilitar o botão de envio
         sendEmailCheckbox.addEventListener('change', () => {
             if (sendEmailCheckbox.checked) {
                 emailInputContainer.classList.remove('hidden');
-                gerarDadosBtn.disabled = !validateEmail(emailInput.value);
+                sendEmailBtn.disabled = !validateEmail(emailInput.value);
             } else {
                 emailInputContainer.classList.add('hidden');
                 emailMessage.classList.add('hidden');
-                gerarDadosBtn.disabled = false;
             }
         });
 
-        // Evento para validar o e-mail e habilitar o botão de geração
+        // Evento para validar o e-mail e habilitar o botão de envio
         emailInput.addEventListener('input', () => {
-            gerarDadosBtn.disabled = !validateEmail(emailInput.value);
+            sendEmailBtn.disabled = !validateEmail(emailInput.value);
         });
 
         function validateEmail(email) {
@@ -656,50 +592,26 @@
             return re.test(String(email).toLowerCase());
         }
         
-        // Evento para o botão "GERAR DADOS" na seção manual
-        gerarDadosManualmenteBtn.addEventListener('click', () => {
-             const condominio = condominioSelect.value;
-            const bloco = blocoInput.value.trim();
-            const apartamento = apartamentoInput.value.trim();
-            const ponto = document.querySelector('input[name="ponto"]:checked').value;
-
-            if (!bloco || !apartamento || !condominio) {
-                showMessage(messageBox, "Por favor, preencha todos os campos.", "error");
-                outputSection.classList.add('hidden');
-                infoSection.classList.add('hidden');
+        // Evento para o botão de enviar e-mail
+        sendEmailBtn.addEventListener('click', () => {
+            const email = emailInput.value.trim();
+            if (!validateEmail(email)) {
+                showMessage(emailMessage, "Por favor, insira um e-mail válido.", "error");
                 return;
             }
-
-            const condominioInfo = condominiumData[condominio];
-            if (!condominioInfo) {
-                showMessage(messageBox, "Condomínio não encontrado. Por favor, selecione um válido.", "error");
-                outputSection.classList.add('hidden');
-                infoSection.classList.add('hidden');
-                return;
-            }
-
-            const usuario = `${bloco}${apartamento}${ponto}`;
             
-            let senha;
-            if (specialPasswordCondos.includes(condominio)) {
-                senha = condominioInfo.passwordPrefix;
-            } else if (condominio === "RESERVA BARRA FUNDA" && condominioInfo.passwordPrefix) {
-                senha = `${condominioInfo.passwordPrefix}${bloco}${apartamento}0${ponto}`;
-            } else {
-                senha = `${condominioInfo.passwordPrefix}${bloco}${apartamento}${ponto}`;
-            }
+            const usuario = document.getElementById('usuarioOutput').value;
+            const senha = document.getElementById('senhaOutput').value;
+            const dominio = document.getElementById('dominioOutput').value;
 
-            const dominio = condominioInfo.domain;
+            showMessage(emailMessage, "Enviando...", "info");
+            sendEmailBtn.disabled = true;
 
-            document.getElementById('usuarioOutput').value = usuario;
-            document.getElementById('senhaOutput').value = senha;
-            document.getElementById('dominioOutput').value = dominio;
-            outputSection.classList.remove('hidden');
-            hideMessage(messageBox);
-
-            document.querySelector('#instrucaoFisico code').textContent = `${bloco}${apartamento}`;
-            document.querySelector('#instrucaoInteligente code').textContent = `${usuario}`;
-            infoSection.classList.remove('hidden');
+            setTimeout(() => {
+                console.log(`Simulando envio de e-mail para ${email} com os dados gerados: Usuário=${usuario}, Senha=${senha}, Domínio=${dominio}`);
+                showMessage(emailMessage, "Dados enviados para o e-mail!", "success");
+                sendEmailBtn.disabled = false;
+            }, 15000);
         });
 
         // Eventos para os botões de copiar
@@ -719,7 +631,7 @@
         });
 
         function showMessage(element, text, type) {
-            element.textContent = text;
+            element.innerHTML = text;
             element.classList.remove('hidden', 'bg-green-100', 'text-green-700', 'bg-red-100', 'text-red-700', 'bg-yellow-100', 'text-yellow-700', 'animated-pulse');
             if (type === "success") {
                 element.classList.add('bg-green-100', 'text-green-700');
