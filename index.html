@@ -37,6 +37,49 @@
             0%, 100% { opacity: 1; }
             50% { opacity: .5; }
         }
+        
+        .card-stack {
+            position: relative;
+            width: 100px;
+            height: 60px;
+        }
+        .card {
+            position: absolute;
+            width: 100px;
+            height: 60px;
+            background-color: #e2e8f0;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            transition: transform 0.5s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .card:nth-child(1) {
+            transform: translateY(0) rotate(0deg);
+            z-index: 3;
+            animation: card-move-1 2s ease-in-out infinite;
+        }
+        .card:nth-child(2) {
+            transform: translateY(0) rotate(2deg);
+            z-index: 2;
+            animation: card-move-2 2s ease-in-out infinite;
+        }
+        .card:nth-child(3) {
+            transform: translateY(0) rotate(-2deg);
+            z-index: 1;
+            animation: card-move-3 2s ease-in-out infinite;
+        }
+        @keyframes card-move-1 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(-5deg); }
+        }
+        @keyframes card-move-2 {
+            0%, 100% { transform: translateY(0) rotate(2deg); }
+            50% { transform: translateY(-10px) rotate(0deg); }
+        }
+        @keyframes card-move-3 {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
     </style>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen p-4">
@@ -71,17 +114,23 @@
                 <input type="text" id="numero" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="(DD) 99999-9999">
             </div>
 
-            <button id="avancarBtn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
-                Avançar
-            </button>
+            <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
+                <button id="avancarBtn" class="w-full md:w-1/2 bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                    Avançar
+                </button>
+                <button id="devSkipBtn" class="w-full md:w-1/2 bg-gray-500 text-white py-2 px-4 rounded-md shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition-colors duration-200">
+                    PULAR (DEV)
+                </button>
+            </div>
 
-            <!-- Loading spinner -->
-            <div id="loadingSpinner" class="hidden text-center mt-4">
-                <svg class="animate-spin h-5 w-5 text-blue-600 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                <span class="ml-2 text-gray-700">Verificando dados...</span>
+            <!-- Loading animation -->
+            <div id="loadingAnimation" class="hidden flex flex-col items-center justify-center mt-4">
+                <div class="card-stack">
+                    <div class="card"></div>
+                    <div class="card"></div>
+                    <div class="card"></div>
+                </div>
+                <span class="mt-4 text-gray-700 text-sm font-medium text-center">Aguarde um momentinho enquanto localizamos o seu cadastro.</span>
             </div>
 
             <div id="authMessageBox" class="mt-4 p-3 rounded-md text-sm text-center hidden"></div>
@@ -193,7 +242,7 @@
                 <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
                 <div class="flex items-center space-x-2">
                     <input type="email" id="email" class="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="exemplo@exemplo.com">
-                    <button id="sendEmailBtn" class="bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 text-sm disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>
+                    <button id="sendEmailBtn" class="bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 text-sm disabled:bg-gray-400 disabled:cursor-not-allowed">
                         Enviar
                     </button>
                 </div>
@@ -364,12 +413,13 @@
         const outputSection = document.getElementById('outputSection');
         const infoSection = document.getElementById('infoSection');
         const avancarBtn = document.getElementById('avancarBtn');
+        const devSkipBtn = document.getElementById('devSkipBtn');
         const gerarDadosBtn = document.getElementById('gerarDadosBtn');
         const sendEmailBtn = document.getElementById('sendEmailBtn');
         const authMessageBox = document.getElementById('authMessageBox');
         const messageBox = document.getElementById('messageBox');
         const emailMessage = document.getElementById('emailMessage');
-        const loadingSpinner = document.getElementById('loadingSpinner');
+        const loadingAnimation = document.getElementById('loadingAnimation');
         const sendEmailCheckbox = document.getElementById('sendEmailCheckbox');
         const emailInputContainer = document.getElementById('emailInputContainer');
         const emailInput = document.getElementById('email');
@@ -418,18 +468,18 @@
                 return;
             }
 
-            // Exibe o spinner de carregamento e desabilita o botão
-            loadingSpinner.classList.remove('hidden');
+            // Exibe a animação de carregamento e desabilita os botões
+            loadingAnimation.classList.remove('hidden');
             avancarBtn.disabled = true;
+            devSkipBtn.disabled = true;
 
             // Simula uma chamada de API para o IXC Soft (API fictícia)
-            // No futuro, a lógica para a chamada real da API do IXC Soft
-            // seria implementada aqui.
             const apiResult = await mockIXCSoftApiCall(cpf);
 
-            // Esconde o spinner de carregamento e reabilita o botão
-            loadingSpinner.classList.add('hidden');
+            // Esconde a animação de carregamento e reabilita os botões
+            loadingAnimation.classList.add('hidden');
             avancarBtn.disabled = false;
+            devSkipBtn.disabled = false;
 
             if (apiResult.success) {
                 // Se a validação for aprovada, preenche os campos do gerador e exibe a seção
@@ -444,18 +494,31 @@
             }
         });
 
+        // Evento para o botão "PULAR (DEV)"
+        devSkipBtn.addEventListener('click', () => {
+            authSection.classList.add('hidden');
+            generatorSection.classList.remove('hidden');
+            hideMessage(authMessageBox); // Esconde a mensagem de erro caso ela esteja visível
+        });
+
         // Função para simular a chamada de API do IXC Soft e retornar dados
         function mockIXCSoftApiCall(cpf) {
             return new Promise(resolve => {
                 setTimeout(() => {
                     // Simula a busca e retorno dos dados para o CPF
-                    const mockData = {
-                        condominio: "BENDORF", // Dados fixos para simulação
-                        bloco: "10",
-                        apartamento: "101"
-                    };
-                    resolve({ success: true, message: "Autenticação bem-sucedida!", data: mockData });
-                }, 1500); // 1.5 segundos de atraso
+                    const sanitizedCpf = cpf.replace(/\D/g, '');
+                    if (sanitizedCpf === "12345678900") { // CPF de teste para simular erro
+                        resolve({ success: false, message: "Não foi possível encontrar seus dados no banco de dados. Por favor, acione o suporte técnico.", linkWhatsApp: true });
+                    } else {
+                        // Dados fixos para simulação em caso de sucesso
+                        const mockData = {
+                            condominio: "BENDORF", 
+                            bloco: "10",
+                            apartamento: "101"
+                        };
+                        resolve({ success: true, message: "Autenticação bem-sucedida!", data: mockData, linkWhatsApp: false });
+                    }
+                }, 3000); // 3 segundos de atraso para a animação
             });
         }
         
