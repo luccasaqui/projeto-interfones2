@@ -35,7 +35,6 @@
             font-weight: 400;
             color: #a0aec0;
         }
-
         /* --- ESTILOS DA ANIMAÇÃO DE CARTÕES --- */
         .card-animation-container {
             position: relative;
@@ -48,13 +47,11 @@
             justify-content: flex-start;
             padding-top: 1rem;
         }
-
         .card-carousel {
             display: flex;
             gap: 1rem;
             animation: slide-cards 8s linear infinite;
         }
-
         .emoji-card {
             flex-shrink: 0;
             width: 70px;
@@ -68,11 +65,9 @@
             font-size: 2.5rem;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-        
         .animation-text {
             margin-top: 1.5rem;
         }
-
         @keyframes slide-cards {
             0% {
                 transform: translateX(0);
@@ -82,7 +77,6 @@
                 transform: translateX(-430px);
             }
         }
-        
         /* Estilos da caixa de mensagem */
         .message-box {
             padding: 0.75rem;
@@ -95,10 +89,8 @@
         .message-box.error { background-color: #fee2e2; color: #991b1b; }
         .message-box.info { background-color: #fef3c7; color: #92400e; }
         .message-box.success { background-color: #d1fae5; color: #065f46; }
-        
         /* Estilos para o ícone de copiar */
         .copy-icon { height: 1.25rem; width: 1.25rem; fill: currentColor; }
-        
         /* Estilos para o toggle switch */
         .toggle-switch { position: relative; display: inline-block; width: 40px; height: 24px; }
         .toggle-switch input { opacity: 0; width: 0; height: 0; }
@@ -106,7 +98,6 @@
         .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
         input:checked + .slider { background-color: #8cff00; }
         input:checked + .slider:before { transform: translateX(16px); }
-
         /* Botões de Ponto de seleção */
         .ponto-button {
             transition: all 0.3s ease;
@@ -121,6 +112,10 @@
             background-color: rgba(52, 211, 153, 0.2);
             border-color: #34d399;
         }
+        /* Estilos para o aspect ratio do vídeo, garantindo a proporção correta */
+        .aspect-w-16 { position: relative; padding-bottom: 56.25%; /* 16:9 */ }
+        .aspect-h-9 { /* Apenas um complemento para o seletor */ }
+        .aspect-w-16 > * { position: absolute; height: 100%; width: 100%; top: 0; right: 0; bottom: 0; left: 0; }
     </style>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen p-4">
@@ -156,7 +151,6 @@
                     Avançar
                 </button>
             </div>
-            
             <!-- ANIMAÇÃO DE CARREGAMENTO -->
             <div id="loadingAnimation" class="hidden mt-4">
                 <div class="card-animation-container">
@@ -175,7 +169,6 @@
                     <span class="animation-text text-gray-300 text-sm font-medium text-center">Aguarde um momentinho! 👨‍💻</span>
                 </div>
             </div>
-
             <div id="authMessageBox" class="message-box hidden"></div>
         </div>
 
@@ -202,7 +195,7 @@
             </div>
             <div id="confirmationMessageBox" class="message-box hidden"></div>
         </div>
-        
+
         <!-- Seção para Escolha do Ponto -->
         <div id="pontoSelectionSection" class="space-y-4 hidden">
             <h2 class="text-xl font-semibold text-center mb-4">Selecione o Ponto</h2>
@@ -267,14 +260,12 @@
                     </div>
                 </div>
             </div>
-
             <!-- Seção de Avisos e Instruções -->
             <div id="infoSection" class="mt-6 space-y-4 text-center">
                 <div id="spamWarning" class="p-4 bg-gray-700 text-yellow-400 border border-gray-600 rounded-lg shadow-sm flex-col items-center justify-center text-center space-y-2 hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400 mx-auto" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.487 0l5.58 9.92c.754 1.346-.246 3.099-1.742 3.099H4.417c-1.496 0-2.498-1.753-1.742-3.099l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
                     <p class="text-sm font-medium">Não encontrou o e-mail? Ele pode estar na sua caixa de spam ou lixo eletrônico.</p>
                 </div>
-
                 <div class="p-4 bg-gray-700 rounded-lg shadow-sm border border-gray-600">
                     <p class="font-semibold mb-3 text-center">Baixar o aplicativo:</p>
                     <div class="flex flex-col items-center space-y-3">
@@ -288,7 +279,6 @@
                         </a>
                     </div>
                 </div>
-
                 <div class="p-6 bg-gray-700 rounded-lg border border-gray-600 shadow-md space-y-4">
                     <h3 class="text-lg font-semibold">Como usar o interfone?</h3>
                     <ul class="text-sm space-y-4 text-gray-300">
@@ -297,20 +287,32 @@
                         <li id="instrucaoInteligente" class="p-2 rounded-md space-y-2"><div class="flex flex-col items-center"><span class="text-sm text-center flex items-center"><span class="mr-2">📲</span>Para ligar no seu interfone inteligente:</span><code class="font-bold text-white text-2xl mt-2 block"></code></div></li>
                     </ul>
                 </div>
-
                 <div class="p-4 bg-gray-700 rounded-lg shadow-sm border border-gray-600">
                     <p class="font-semibold mb-2">Ficou com alguma dúvida?</p>
                     <div class="flex flex-col items-center space-y-2 mt-4">
-                        <a href="https://www.youtube.com/watch?v=lZxGqBq7S5U" target="_blank" class="w-full flex items-center justify-center px-4 py-3 bg-red-600 text-white font-medium text-sm rounded-md shadow-md hover:bg-red-700 transition-colors duration-200">
+                        <!-- BOTÃO MODIFICADO: De <a> para <button> para abrir o modal -->
+                        <button id="openTutorialBtn" class="w-full flex items-center justify-center px-4 py-3 bg-red-600 text-white font-medium text-sm rounded-md shadow-md hover:bg-red-700 transition-colors duration-200 cursor-pointer">
                             <i class="fab fa-youtube fa-lg mr-3"></i>
                             Assistir o tutorial
-                        </a>
+                        </button>
                         <a href="https://wa.me/551140205322" target="_blank" class="w-full flex items-center justify-center px-4 py-3 bg-green-600 text-white font-medium text-sm rounded-md shadow-md hover:bg-green-700 transition-colors duration-200">
                             <i class="fab fa-whatsapp fa-lg mr-3"></i>
                             Falar com o suporte?
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para o vídeo do YouTube -->
+    <div id="videoModal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4 transition-opacity duration-300">
+        <div class="bg-gray-900 p-2 sm:p-4 rounded-2xl shadow-xl relative w-full max-w-3xl border border-gray-700">
+            <!-- Botão de Fechar -->
+            <button id="closeModalBtn" class="absolute -top-3 -right-3 h-8 w-8 bg-white rounded-full text-black text-2xl font-bold flex items-center justify-center z-10 leading-none hover:bg-gray-200 transition-colors">&times;</button>
+            <!-- Container do Vídeo com Aspect Ratio -->
+            <div class="aspect-w-16 aspect-h-9 bg-black rounded-lg overflow-hidden">
+                <iframe id="youtubePlayer" class="w-full h-full" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -366,6 +368,42 @@
         // Funções de utilidade para mensagens
         function showMessage(element, text, type, showSupportButtons = false) { element.innerHTML = `<p>${text}</p>`; element.className = `message-box ${type}`; element.classList.remove('hidden'); if (showSupportButtons) { const supportDiv = document.createElement('div'); supportDiv.className = "mt-4 flex flex-col items-center space-y-2"; supportDiv.innerHTML = ` <button id="tryAgainBtn" class="w-full flex items-center justify-center px-4 py-3 bg-blue-600 text-white font-medium text-sm rounded-md shadow-md hover:bg-blue-700 transition-colors duration-200"> <i class="fas fa-redo-alt fa-lg mr-3"></i> Tentar Novamente </button> <a href="https://wa.me/551140205322" target="_blank" class="w-full flex items-center justify-center px-4 py-3 bg-green-600 text-white font-medium text-sm rounded-md shadow-md hover:bg-green-700 transition-colors duration-200"> <i class="fab fa-whatsapp fa-lg mr-3"></i> Falar com o suporte? </a> `; element.appendChild(supportDiv); document.getElementById('tryAgainBtn').addEventListener('click', () => { hideMessage(authMessageBox); mainButtonsContainer.classList.remove('hidden'); }); } else if (type !== "info") { setTimeout(() => { element.classList.add('hidden'); }, 3000); } }
         function hideMessage(element) { element.classList.add('hidden'); }
+
+        // --- LÓGICA DO MODAL DE VÍDEO ---
+        const videoModal = document.getElementById('videoModal');
+        const openTutorialBtn = document.getElementById('openTutorialBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const youtubePlayer = document.getElementById('youtubePlayer');
+        const videoSrc = "https://www.youtube.com/embed/lZxGqBq7S5U";
+
+        // Abrir o modal
+        openTutorialBtn.addEventListener('click', () => {
+            youtubePlayer.src = videoSrc + "?autoplay=1&rel=0"; // Adiciona autoplay e remove vídeos relacionados
+            videoModal.classList.remove('hidden');
+        });
+
+        // Função para fechar o modal
+        const closeModal = () => {
+            videoModal.classList.add('hidden');
+            youtubePlayer.src = ""; // Para a reprodução do vídeo ao fechar
+        };
+
+        // Fechar o modal pelo botão
+        closeModalBtn.addEventListener('click', closeModal);
+
+        // Fechar o modal ao clicar fora da área do vídeo
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                closeModal();
+            }
+        });
+
+        // Fechar o modal com a tecla 'Escape'
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape" && !videoModal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
